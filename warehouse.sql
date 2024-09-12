@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `carparts` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table db.carparts: ~7 rows (approximately)
+DELETE FROM `carparts`;
 INSERT INTO `carparts` (`id`, `Part_name`, `Part_description`, `Image`, `VIN`, `Count`, `Part_type`, `Color`, `Weight`, `Width`, `Hight`, `Depth`, `Size`, `Voltage`, `Capacity`, `Tire code`, `Stiffness_min`, `Stiffness_max`, `Stiffness_adjustable`, `Hight_min`, `Hight_max`, `Hight_adjustable`, `Egine_type`, `Max_pressure`, `Cylidders`, `HP`, `Displacement`, `Torqe`, `Max_rpm`) VALUES
 	(1, 'Sudraba krāsas diski', 'Liela izmēra pelēkie diski', NULL, 'JN3MS37AP', 24, 'Rims', 'Sudraba', 0, 0, 0, 0, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(2, 'Pielāgojamas atsperes', 'Pielāgojamas sporta atsperes', NULL, NULL, 64, 'Springs', 'Melnas', 0, 0, 0, 0, NULL, NULL, NULL, NULL, 20, 40, b'1', 30, 40, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -78,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `companies` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table db.companies: ~8 rows (approximately)
+DELETE FROM `companies`;
 INSERT INTO `companies` (`id`, `Company_name`, `Location`, `Latitude`, `Longitude`, `Has_import`, `Has_export`, `Has_shipping`, `Export_tax`) VALUES
 	(1, 'BMW', 'On Earth', 0, 0, b'1', b'1', b'1', 0.200000),
 	(2, 'WV', 'Someweare', 0, 0, b'1', b'1', b'1', 0.150000),
@@ -101,7 +103,8 @@ CREATE TABLE IF NOT EXISTS `exporting` (
   CONSTRAINT `FK_exporting_carparts` FOREIGN KEY (`Part`) REFERENCES `carparts` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table db.exporting: ~0 rows (approximately)
+-- Dumping data for table db.exporting: ~5 rows (approximately)
+DELETE FROM `exporting`;
 INSERT INTO `exporting` (`id`, `Company`, `Part`, `Price`) VALUES
 	(1, 1, 2, 276.000000),
 	(2, 1, 5, 252.000000),
@@ -119,6 +122,7 @@ CREATE TABLE IF NOT EXISTS `importing` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table db.importing: ~0 rows (approximately)
+DELETE FROM `importing`;
 
 -- Dumping structure for table db.pardosanas_dokuments
 CREATE TABLE IF NOT EXISTS `pardosanas_dokuments` (
@@ -139,6 +143,7 @@ CREATE TABLE IF NOT EXISTS `pardosanas_dokuments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table db.pardosanas_dokuments: ~0 rows (approximately)
+DELETE FROM `pardosanas_dokuments`;
 
 -- Dumping structure for table db.part_display_colums
 CREATE TABLE IF NOT EXISTS `part_display_colums` (
@@ -149,6 +154,7 @@ CREATE TABLE IF NOT EXISTS `part_display_colums` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table db.part_display_colums: ~0 rows (approximately)
+DELETE FROM `part_display_colums`;
 
 -- Dumping structure for table db.transporting
 CREATE TABLE IF NOT EXISTS `transporting` (
@@ -160,6 +166,7 @@ CREATE TABLE IF NOT EXISTS `transporting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table db.transporting: ~0 rows (approximately)
+DELETE FROM `transporting`;
 
 -- Dumping structure for table db.warehouse
 CREATE TABLE IF NOT EXISTS `warehouse` (
@@ -176,6 +183,7 @@ CREATE TABLE IF NOT EXISTS `warehouse` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table db.warehouse: ~7 rows (approximately)
+DELETE FROM `warehouse`;
 INSERT INTO `warehouse` (`id`, `Company`, `Car_part`, `Count`, `Price`) VALUES
 	(1, 8, 4, 5, 550.000000),
 	(2, 1, 5, 21, 210.000000),

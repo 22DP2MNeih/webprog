@@ -1,0 +1,20 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "password": "",
+            "database": "db",
+            "username": "root",
+            "name": "Car_part_db",
+            "group": "Car_part_db",
+            "connectionTimeout": 1000
+        }
+    ]
+}
