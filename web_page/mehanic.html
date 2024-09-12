@@ -1,28 +1,51 @@
 <!DOCTYPE html>
 <html>
-    
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Car part manegment</title>
     </head>
     <header>
-        <h1>Car part manegment</h1>
+        <h1 class="glass">Car part manegment</h1>
     </header>
     <body>
         <main>
-            <div class="search">
-                <label for="country">Country</label>
-                <select id="country" name="country">
-                    <option value="australia">Australia</option>
-                    <option value="canada">Canada</option>
-                    <option value="usa">USA</option>
+            <div class="pad_right">
+            <div class="rcorners1">
+                <label for="part_type">Search</label>
+                <select id="part_type" name="part_type">
+                    <option value="engine">Engine</option>
+                    <option value="springs">Springs</option>
+                    <option value="rims">Rims</option>
                 </select>
+                <div class="custom-select" style="width:200px;">
+                    <select>
+                      <option value="0">Select car:</option>
+                      <option value="1">Audi</option>
+                      <option value="2">BMW</option>
+                      <option value="3">Citroen</option>
+                      <option value="4">Ford</option>
+                      <option value="5">Honda</option>
+                      <option value="6">Jaguar</option>
+                      <option value="7">Land Rover</option>
+                      <option value="8">Mercedes</option>
+                      <option value="9">Mini</option>
+                      <option value="10">Nissan</option>
+                      <option value="11">Toyota</option>
+                      <option value="12">Volvo</option>
+                    </select>
+                  </div>
+            </div>
             </div>
         </main>
     </body>
     <style>
-        div.search {
-            background-color:rgb(220, 220, 220);
+        html, body {
+            width: 100%;
+            height: 100%;
         }
+        /*div.search {
+            background-color:rgb(220, 220, 220);
+        }*/
         div.part_row {
             font-size: 12px;
         }
@@ -34,9 +57,93 @@
         }
         body {
             background: url(../img/background3.webp) no-repeat;
-            background-size: 100%;
-            /*background-position-y: -20%;*/
+            background-size: cover;
             overflow: hidden;
+
         }
+        .pad_right {
+            padding-right: 20px;
+        }
+        .rcorners1 {
+        border-radius: 65px;
+        padding: 20px;
+        vertical-align: middle;
+        
+        /*width: 80%;*/
+        height: 25px;
+        background-color: rgba(220, 220, 220, 0.85);
+        font-size: 20px;
+        }
+        .glass {
+        background: rgba(255, 255, 255, 0.28);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        }
+        h1 {
+            font-size: 80px;
+            text-align: center;
+        }
+        /* The container must be positioned relative: */
+.custom-select {
+  position: relative;
+  font-family: Arial;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-color: DodgerBlue;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
     </style>
 </html>
