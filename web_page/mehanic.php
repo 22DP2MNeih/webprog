@@ -1,4 +1,35 @@
 <!DOCTYPE html>
+
+<?php 
+include "php/functions.php";
+
+if (isset($_GET['part'])) {
+    $part = urldecode($_GET['part']);
+} else {
+    $part = '';
+}
+
+if (isset($_GET['active'])) {
+    $part = urldecode($_GET['active']);
+} else {
+    $part = '';
+}
+
+$input_id = '';
+if (isset($_GET['current_input'])) {
+    $input_id = 'link_to_someware' + urldecode($_GET['current_input']);
+} else {
+    $input_id = 'link_to_someware2';
+}
+if (isset($_GET['link_to_someware2'])) {
+    echo urldecode($_GET['link_to_someware2']);
+}
+
+for ($x = 0; $x <= 10; $x++) {
+    echo "The number is: $x <br>";
+}
+?>
+
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +42,7 @@
         
     </header>
     <body>
+        <script src="scripts/jsisfunjaa.js"></script>
         <main class="pad_right">
             <div class="pad_right search">
                 <table>
@@ -22,42 +54,46 @@
                         <th class="search">
                             Part type
                         </th>
+                        <?php
+                        $data = GetPartIndexes($part);
+                        foreach ($data as $row) {
+                            echo "<th class='search'>" . $row["Display_columns"] . "</th>";
+                        }
+                        ?>
                     </tr>
                     <tr class="search">
                         <th class="search">
-                            <input type="text" id="part_type" list="part_type_list" placeholder="Input part type" class="custom-select">
-                            <datalist id="part_type_list" style="height:5.1em;overflow:hidden">
+                            <input type="text" id="part" list="part_list" placeholder="Input part type" class="custom-select" oninput="SendDataWhenNotTyping(part)">
+                            <datalist id="part_list">
+                                <?php GetPartTypes(); ?>
+                            </datalist>
+                        </th>
+                        <?php
+                        $data = GetPartIndexes($part);
+                        foreach ($data as $row) {
+                            $col = $row["Display_columns"];
+                            $col_id = $row["Column"];
+                            
+                            echo ?> <th class="search">
+                            <input type="text" id="<?php echo $col; ?>" list="<?php echo $col; ?>_list" placeholder="Input <?php echo $col; ?>" class="custom-select">
+                            <datalist id="<?php echo $col; ?>_list">
+
+                            </datalist>
+                        </th> <?php echo $row["Display_columns"] ?> </th>";
+                        
+                        <?php
+                        }
+                        ?>
+                        <th class="search">
+                            <input type="text" id="part_size" list="part_size_list" placeholder="Input part size" class="custom-select">
+                            <datalist id="part_size_list">
+                                <option value="1"></option>
+                                <option value="2"></option>
+                                <option value="3"></option>
                                 <option value="Engine"></option>
                                 <option value="Springs"></option>
                                 <option value="Rims"></option>
-                                <option value="Rims1"></option>
-                                <option value="Rims2"></option>
-                                <option value="Rims3"></option>
-                                <option value="Rims4"></option>
-                                <option value="Rims5"></option>
-                                <option value="Rims6"></option>
-                                <option value="Rims7"></option>
-                                <option value="Rims11"></option>
-                                <option value="Rims22"></option>
-                                <option value="Rims33"></option>
-                                <option value="Rims44"></option>
-                                <option value="Rims55"></option>
-                                <option value="Rims66"></option>
-                                <option value="Rims76"></option>
-                                <option value="Rims1111"></option>
-                                <option value="Rims21"></option>
-                                <option value="Rims31"></option>
-                                <option value="Rims41"></option>
-                                <option value="Rims51"></option>
-                                <option value="Rims61"></option>
-                                <option value="Rims71"></option>
-                                <option value="Rims111"></option>
-                                <option value="Rims221"></option>
-                                <option value="Rims331"></option>
-                                <option value="Rims441"></option>
-                                <option value="Rims551"></option>
-                                <option value="Rims661"></option>
-                                <option value="Rims761"></option>
+                                <option value="aaa"></option>
                             </datalist>
                         </th>
                     </tr>
@@ -94,12 +130,10 @@
         .pad_right {
             padding-right: 20px;
         }
-        th.search {
+        th.search, tr.search {
             padding: 0px;
         }
-        tr.search {
-            padding: 0px;
-        }
+        
         div.search {
             border-radius: 65px;
             padding: 20px;

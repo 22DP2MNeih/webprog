@@ -1,4 +1,26 @@
 <!DOCTYPE html>
+
+<?php 
+if (isset($_GET['part'])) {
+    $part = urldecode($_GET['part']);
+}
+
+$input_id = '';
+if (isset($_GET['current_input'])) {
+    $input_id = 'link_to_someware' + urldecode($_GET['current_input']);
+} else {
+    $input_id = 'link_to_someware2';
+}
+if (isset($_GET['link_to_someware2'])) {
+    echo urldecode($_GET['link_to_someware2']);
+    $
+}
+
+for ($x = 0; $x <= 10; $x++) {
+    echo "The number is: $x <br>";
+}
+?>
+
 <html>
     
     <head>
@@ -10,10 +32,25 @@
             <h1>Car part manegment</h1>
         </div>
     </header>
-    <body>
+    <body onload="focusInput()">
         <main>
-            
             <h5><a href="login.html">link text</a></h5>
+            <h5><a href="login.html?aaa=bbb">link text</a></h5>
+            <h5><input type="text" id="link_to_someware1" oninput="location.href = 'main.php?input2=' + link_to_someware1.value;" value=<?php
+                    if (isset($_GET['link_to_someware2'])) {
+                        echo urldecode($_GET['link_to_someware2']);
+                    }
+                ?>>
+                </input>
+            </h5>
+            <h5><input type="text" id="link_to_someware2" oninput="SendDataWhenNotTyping(link_to_someware2.value, 'link_to_someware2');" value=<?php
+                    if (isset($_GET['link_to_someware2'])) {
+                        echo urldecode($_GET['link_to_someware2']);
+                    }
+                ?>>
+                </input>
+                <script src="scripts\jsisfunjee.js" type="text/javascript"></script>
+            </h5>
         </main>
     </body>
     <style>
