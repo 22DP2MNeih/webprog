@@ -9,11 +9,6 @@ if (isset($_GET['part'])) {
     $part = '';
 }
 
-if (isset($_GET['active'])) {
-    $part = urldecode($_GET['active']);
-} else {
-    $part = '';
-}
 
 $input_id = '';
 if (isset($_GET['current_input'])) {
@@ -26,7 +21,7 @@ if (isset($_GET['link_to_someware2'])) {
 }
 
 for ($x = 0; $x <= 10; $x++) {
-    echo "The number is: $x <br>";
+    echo "The number is: $x";
 }
 ?>
 
@@ -42,15 +37,13 @@ for ($x = 0; $x <= 10; $x++) {
         
     </header>
     <body>
-        <script src="scripts/jsisfunjaa.js"></script>
+        <script src="scripts/jsisfunjee.js"></script>
         <main class="pad_right">
             <div class="pad_right search">
                 <table>
                     <tr class="search">
                         
-                        <th class="search" rowspan="2">
-                            Search
-                        </th>
+                        
                         <th class="search">
                             Part type
                         </th>
@@ -63,39 +56,19 @@ for ($x = 0; $x <= 10; $x++) {
                     </tr>
                     <tr class="search">
                         <th class="search">
-                            <input type="text" id="part" list="part_list" placeholder="Input part type" class="custom-select" oninput="SendDataWhenNotTyping(part)">
+                            <input type="text" id="part" list="part_list" placeholder="Part type" class="custom-select" oninput="SendDataWhenNotTyping(part.value, 'part')">
                             <datalist id="part_list">
                                 <?php GetPartTypes(); ?>
                             </datalist>
                         </th>
                         <?php
-                        $data = GetPartIndexes($part);
                         foreach ($data as $row) {
                             $col = $row["Display_columns"];
                             $col_id = $row["Column"];
-                            
-                            echo ?> <th class="search">
-                            <input type="text" id="<?php echo $col; ?>" list="<?php echo $col; ?>_list" placeholder="Input <?php echo $col; ?>" class="custom-select">
-                            <datalist id="<?php echo $col; ?>_list">
 
-                            </datalist>
-                        </th> <?php echo $row["Display_columns"] ?> </th>";
-                        
-                        <?php
+                            echo "<th class='search'><input type='text' id=" . $col . " list='" . $col . "_list' placeholder='" . $col . "' class='custom-select'><datalist id='" . $col_id . "' oninput='SendDataWhenNotTyping(" . $col_id . ", " . $col_id . ")'></datalist></th>";
                         }
                         ?>
-                        <th class="search">
-                            <input type="text" id="part_size" list="part_size_list" placeholder="Input part size" class="custom-select">
-                            <datalist id="part_size_list">
-                                <option value="1"></option>
-                                <option value="2"></option>
-                                <option value="3"></option>
-                                <option value="Engine"></option>
-                                <option value="Springs"></option>
-                                <option value="Rims"></option>
-                                <option value="aaa"></option>
-                            </datalist>
-                        </th>
                     </tr>
                 </table>
             </div>
@@ -142,7 +115,7 @@ for ($x = 0; $x <= 10; $x++) {
             /*width: 80%;*/
             height: 60px;
             background-color: rgba(220, 220, 220, 0.8);
-            font-size: 25px;
+            font-size: 20px;
             box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
@@ -168,6 +141,14 @@ for ($x = 0; $x <= 10; $x++) {
             background-color: rgb(97, 97, 255);
             font-size: 20px;
             color: rgb(8, 8, 8);
+            width: 128px;
         }
+        .custom-select:hover {
+            background-color: rgb(120, 120, 255);
+        }
+        .custom-select::placeholder {
+            color: rgb(75, 75, 75);
+        }
+
     </style>
 </html>
