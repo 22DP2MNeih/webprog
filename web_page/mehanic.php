@@ -8,21 +8,6 @@ if (isset($_GET['part'])) {
 } else {
     $part = '';
 }
-
-
-$input_id = '';
-if (isset($_GET['current_input'])) {
-    $input_id = 'link_to_someware' + urldecode($_GET['current_input']);
-} else {
-    $input_id = 'link_to_someware2';
-}
-if (isset($_GET['link_to_someware2'])) {
-    echo urldecode($_GET['link_to_someware2']);
-}
-
-for ($x = 0; $x <= 10; $x++) {
-    echo "The number is: $x";
-}
 ?>
 
 <html>
@@ -38,7 +23,7 @@ for ($x = 0; $x <= 10; $x++) {
     </header>
     <body>
         <script src="scripts/jsisfunjee.js"></script>
-        <main class="pad_right">
+        <main class="pad_right" onload="SetUpDynamicData(<?php echo json_encode($_GET); ?>);">
             <div class="pad_right search">
                 <table>
                     <tr class="search">
@@ -56,17 +41,58 @@ for ($x = 0; $x <= 10; $x++) {
                     </tr>
                     <tr class="search">
                         <th class="search">
-                            <input type="text" id="part" list="part_list" placeholder="Part type" class="custom-select" oninput="SendDataWhenNotTyping(part.value, 'part')">
+                            <input type="text" id="part_id" list="part_list" placeholder="Part type" class="custom-select" oninput="SendDataWhenNotTyping(part_id.value, 'part');">
                             <datalist id="part_list">
                                 <?php GetPartTypes(); ?>
                             </datalist>
                         </th>
                         <?php
+                        if (isset($_GET["last_input"])) {
+                            $last = urldecode($_GET['last_input']);
+                        } else {
+                            $last = '';
+                        }
+                        $last_input_i = 0;
+                        if (isset($_GET["last_input"])) {
+                            //trigger exception in a "try" block
+                            try {
+                                $last_input_i = (int) urldecode($_GET['last_input']);
+                            }
+                            //catch exception
+                            catch(Exception $e) {
+                                $last_input_i = 0;
+                            }
+                        }
+                        
                         foreach ($data as $row) {
                             $col = $row["Display_columns"];
                             $col_id = $row["Column"];
+                            $temp;
 
-                            echo "<th class='search'><input type='text' id=" . $col . " list='" . $col . "_list' placeholder='" . $col . "' class='custom-select'><datalist id='" . $col_id . "' oninput='SendDataWhenNotTyping(" . $col_id . ", " . $col_id . ")'></datalist></th>";
+                            if (isset($_GET[$col])) {
+                                $value = urldecode($_GET[$col]);
+                            } else {
+                                $value = '';
+                            }
+
+                            // echo "<th class='search'><input type='text' id='" . $col_id . "' list='" . $col_id . "_list' placeholder='" . $col . "' class='custom-select' oninput='SendDataWhenNotTyping(" . $col_id . ".value, \x27" . $col_id . "\x27);\"><datalist id='" . $col_id . "_list'></datalist></th>";
+                            $temp = <<<EOT
+                            <th class='search'><input value='$value' type='text' id='$col_id' list='{$col_id}_list' placeholder='$col' class='custom-select' oninput="SendDataWhenNotTyping($col_id.value, \x27$col\x27);"><datalist id='{$col_id}_list'></datalist></th>
+                            EOT;
+                            echo $temp;
+                            if ($col == $last) {
+                                $js = <<<EOT
+                                script type="text/javascript">
+                                function moveCursorTo(id, pos) {
+                                    const input = document.getElementById(id);
+                                    input.focus();  // Focus on the input
+                                    input.setSelectionRange(pos, pos);  // Set the cursor to the end
+                                }
+                                moveCursorTo($col_id, $last_input_i);
+                                </script>
+                                EOT;
+                                echo $js;
+                            }
                         }
                         ?>
                     </tr>

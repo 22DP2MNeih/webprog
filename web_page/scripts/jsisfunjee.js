@@ -13,14 +13,22 @@ function SendDataWhenNotTyping(input_text, elem_id) {
 }
 
 function refreshPage() {
-    let data_string;
+    let data_string = "mehanic.php?";
     for (var key in dynamic_data_map){
         console.log(key, dynamic_data_map[key]);
         data_string += key + "=" + dynamic_data_map[key] + "&";
     }
-    data_string + "last=" + last_input + "&input_i=" + last_input;
+    data_string += "last_input=" + last_input + "&input_i=" + last_input_i;
     console.log(data_string);
-    // window.location.href = 'mehanic.php?' + encodeURI(data_string);
+    window.location.href = 'mehanic.php?' + encodeURI(data_string);
+}
+
+function SetUpDynamicData(url_data) {
+    console.log("hey");
+    dynamic_data_map = JSON.parse(url_data);
+    dynamic_data_map = JSON.parse(url_data);
+    console.log(dynamic_data_map["HP"]);
+    // console.log(url_data);
 }
 
 function focusInput(input_id) {
