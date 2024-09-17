@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `carparts` (
   `Image` binary(50) DEFAULT NULL,
   `VIN` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `Count` int NOT NULL,
-  `Part_type` enum('Engine','Tire','Battery','Anti-roll bar','Springs','Rims','Car body') NOT NULL,
+  `Part_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Color` varchar(20) DEFAULT NULL,
   `Weight` float NOT NULL,
   `Width` float NOT NULL,
@@ -50,19 +50,38 @@ CREATE TABLE IF NOT EXISTS `carparts` (
   `Displacement` float DEFAULT NULL,
   `Torqe` float DEFAULT NULL,
   `Max_rpm` float DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Int0` int DEFAULT NULL,
+  `Float0` float DEFAULT NULL,
+  `Float1` float DEFAULT NULL,
+  `Float2` float DEFAULT NULL,
+  `Float3` float DEFAULT NULL,
+  `Float4` float DEFAULT NULL,
+  `Float5` float DEFAULT NULL,
+  `Float6` float DEFAULT NULL,
+  `Float7` float DEFAULT NULL,
+  `Bool0` tinyint(1) DEFAULT NULL,
+  `Bool1` tinyint(1) DEFAULT NULL,
+  `Str0` varchar(20) DEFAULT NULL,
+  `Special_index0` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_carparts_part_types` (`Part_type`) USING BTREE,
+  KEY `FK_carparts_part_special_indexes` (`Special_index0`) USING BTREE,
+  CONSTRAINT `FK_carparts_part_special_index0` FOREIGN KEY (`Special_index0`) REFERENCES `part_special_indexes` (`id`),
+  CONSTRAINT `FK_carparts_part_types` FOREIGN KEY (`Part_type`) REFERENCES `part_types` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table db.carparts: ~7 rows (approximately)
+-- Dumping data for table db.carparts: ~9 rows (approximately)
 DELETE FROM `carparts`;
-INSERT INTO `carparts` (`id`, `Part_name`, `Part_description`, `Image`, `VIN`, `Count`, `Part_type`, `Color`, `Weight`, `Width`, `Hight`, `Depth`, `Size`, `Voltage`, `Capacity`, `Tire code`, `Stiffness_min`, `Stiffness_max`, `Stiffness_adjustable`, `Hight_min`, `Hight_max`, `Hight_adjustable`, `Egine_type`, `Max_pressure`, `Cylidders`, `HP`, `Displacement`, `Torqe`, `Max_rpm`) VALUES
-	(1, 'Sudraba krāsas diski', 'Liela izmēra pelēkie diski', NULL, 'JN3MS37AP', 24, 'Rims', 'Sudraba', 0, 0, 0, 0, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(2, 'Pielāgojamas atsperes', 'Pielāgojamas sporta atsperes', NULL, NULL, 64, 'Springs', 'Melnas', 0, 0, 0, 0, NULL, NULL, NULL, NULL, 20, 40, b'1', 30, 40, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(3, 'Hellcat motors', 'Hellcat V8 motors', NULL, NULL, 16, 'Engine', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'V-type', NULL, 8, 700, 6.4, 820, 8000),
-	(4, 'Mazda rotormotors', 'Mazda RX7 orģinālais rotormotors', NULL, 'J--------', 10, 'Engine', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Wankel', NULL, 2, 110, 2.4, 135, 7000),
-	(5, 'Sporta Stabilizators', 'Pielāgojams stabilizātors sprta mašīnām', NULL, NULL, 42, 'Anti-roll bar', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 20, 35, b'1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(6, 'Akumulātors', '12V akumulātors jebkuram auto', NULL, NULL, 1086, 'Battery', NULL, 0, 0, 0, 0, NULL, 12, 100, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(7, 'Riepas', 'Vasaras riepas', NULL, NULL, 0, 'Tire', NULL, 0, 0, 0, 0, NULL, NULL, NULL, 'P215/65R15 95H', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3.4, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `carparts` (`id`, `Part_name`, `Part_description`, `Image`, `VIN`, `Count`, `Part_type`, `Color`, `Weight`, `Width`, `Hight`, `Depth`, `Size`, `Voltage`, `Capacity`, `Tire code`, `Stiffness_min`, `Stiffness_max`, `Stiffness_adjustable`, `Hight_min`, `Hight_max`, `Hight_adjustable`, `Egine_type`, `Max_pressure`, `Cylidders`, `HP`, `Displacement`, `Torqe`, `Max_rpm`, `Int0`, `Float0`, `Float1`, `Float2`, `Float3`, `Float4`, `Float5`, `Float6`, `Float7`, `Bool0`, `Bool1`, `Str0`, `Special_index0`) VALUES
+	(1, 'Sudraba krāsas diski', 'Liela izmēra pelēkie diski', NULL, 'JN3MS37AP', 24, 'Rims', 'Sudraba', 0, 0, 0, 0, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Sudraba', NULL),
+	(2, 'Pielāgojamas atsperes', 'Pielāgojamas sporta atsperes', NULL, NULL, 64, 'Spring', 'Melns', 0, 0, 0, 0, NULL, NULL, NULL, NULL, 20, 40, b'1', 30, 40, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 20, 40, 30, 40, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL),
+	(3, 'Hellcat motors', 'Hellcat V8 motors', NULL, NULL, 16, 'Engine', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'V-type', NULL, 8, 700, 6.4, 820, 8000, 8, 700, 6.4, 820, 8000, 450, 1.7, 1.3, 1.4, NULL, NULL, NULL, 'V-type'),
+	(4, 'Mazda rotormotors', 'Mazda RX7 orģinālais rotormotors', NULL, 'J--------', 10, 'Engine', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Wankel', NULL, 2, 110, 2.4, 135, 7000, 2, 110, 2.4, 135, 7000, 120, 1.2, 0.6, 0.9, NULL, NULL, NULL, 'Wankel'),
+	(5, 'Sporta Stabilizators', 'Pielāgojams stabilizātors sprta mašīnām', NULL, NULL, 42, 'Anti-roll bar', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 20, 35, b'1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 20, 35, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
+	(6, 'Akumulātors', '12V akumulātors jebkuram auto', NULL, NULL, 1086, 'Battery', NULL, 0, 0, 0, 0, NULL, 12, 100, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 12, 100, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(7, 'Riepas', 'Vasaras riepas', NULL, NULL, 0, 'Tire', NULL, 0, 0, 0, 0, NULL, NULL, NULL, 'P215/65R15 95H', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3.4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'P215/65R15 95H', NULL),
+	(8, 'Krutākie melnie diski', 'Melnie diski kas izcels katru auto', NULL, 'JN3MS37AP', 12, 'Rims', 'Melns', 0, 0, 0, 0, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Melna', NULL),
+	(9, 'Krutākie melnie diski2', 'Melnie diski kas izcels katru auto', NULL, 'JN3MS37AP', 12, 'Rims', 'Melns', 0, 0, 0, 0, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Melna', NULL);
 
 -- Dumping structure for table db.companies
 CREATE TABLE IF NOT EXISTS `companies` (
@@ -89,6 +108,39 @@ INSERT INTO `companies` (`id`, `Company_name`, `Location`, `Latitude`, `Longitud
 	(6, 'Sikais makaniku kantoris 1', '??', 0, 0, b'1', b'0', b'0', NULL),
 	(7, 'Mustang', '??', 0, 0, b'1', b'1', b'0', 0.220000),
 	(8, 'Mazda', '???', 0, 0, b'0', b'1', b'0', 0.180000);
+
+-- Dumping structure for table db.display_colums
+CREATE TABLE IF NOT EXISTS `display_colums` (
+  `id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Data_type` enum('Int','Float','Bool','Special_index','str') NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table db.display_colums: ~22 rows (approximately)
+DELETE FROM `display_colums`;
+INSERT INTO `display_colums` (`id`, `Data_type`) VALUES
+	('Capacity', 'Float'),
+	('Color', 'str'),
+	('Cyliders', 'Int'),
+	('Depth', 'Float'),
+	('Displacement', 'Float'),
+	('Engine type', 'Special_index'),
+	('Hight', 'Float'),
+	('Hight adjustable', 'Bool'),
+	('Hight max', 'Float'),
+	('Hight min', 'Float'),
+	('HP', 'Float'),
+	('Max pressure', 'Float'),
+	('Max rpm', 'Float'),
+	('Size', 'Float'),
+	('Stiffness adjustable', 'Bool'),
+	('Stiffness max', 'Float'),
+	('Stiffness nin', 'Float'),
+	('Tire code', 'str'),
+	('Torqe', 'Float'),
+	('Voltage', 'Float'),
+	('Weight', 'Float'),
+	('Width', 'Float');
 
 -- Dumping structure for table db.exporting
 CREATE TABLE IF NOT EXISTS `exporting` (
@@ -148,13 +200,78 @@ DELETE FROM `pardosanas_dokuments`;
 -- Dumping structure for table db.part_display_colums
 CREATE TABLE IF NOT EXISTS `part_display_colums` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `Part_type` varchar(10) NOT NULL DEFAULT '0',
-  `Display_columns` varchar(10) NOT NULL DEFAULT '0',
+  `Part_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
+  `Display_columns` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
+  `Column_id` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `Part_type` (`Part_type`),
+  KEY `Display_columns` (`Display_columns`),
+  CONSTRAINT `FK_part_display_colums_display_colums` FOREIGN KEY (`Display_columns`) REFERENCES `display_colums` (`id`),
+  CONSTRAINT `FK_part_display_colums_part_types` FOREIGN KEY (`Part_type`) REFERENCES `part_types` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table db.part_display_colums: ~24 rows (approximately)
+DELETE FROM `part_display_colums`;
+INSERT INTO `part_display_colums` (`id`, `Part_type`, `Display_columns`, `Column_id`) VALUES
+	(1, 'Rims', 'Size', 0),
+	(2, 'Rims', 'Color', 0),
+	(3, 'Tire', 'Tire code', 0),
+	(4, 'Spring', 'Hight adjustable', 1),
+	(5, 'Spring', 'Hight max', 3),
+	(6, 'Spring', 'Hight min', 2),
+	(7, 'Spring', 'Stiffness nin', 0),
+	(8, 'Spring', 'Stiffness max', 1),
+	(9, 'Spring', 'Stiffness adjustable', 0),
+	(10, 'Engine', 'Cyliders', 0),
+	(11, 'Engine', 'HP', 0),
+	(12, 'Engine', 'Displacement', 1),
+	(13, 'Engine', 'Torqe', 2),
+	(14, 'Engine', 'Max rpm', 3),
+	(15, 'Engine', 'Engine type', 0),
+	(16, 'Engine', 'Weight', 4),
+	(17, 'Engine', 'Width', 5),
+	(18, 'Engine', 'Hight', 6),
+	(19, 'Engine', 'Depth', 7),
+	(20, 'Anti-roll bar', 'Stiffness nin', 0),
+	(21, 'Anti-roll bar', 'Stiffness max', 1),
+	(22, 'Anti-roll bar', 'Stiffness adjustable', 0),
+	(23, 'Battery', 'Capacity', 1),
+	(24, 'Battery', 'Voltage', 0);
+
+-- Dumping structure for table db.part_special_indexes
+CREATE TABLE IF NOT EXISTS `part_special_indexes` (
+  `id` varchar(20) NOT NULL DEFAULT '',
+  `Part_type` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_part_special_indexes_part_types` (`Part_type`),
+  CONSTRAINT `FK_part_special_indexes_part_types` FOREIGN KEY (`Part_type`) REFERENCES `part_types` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table db.part_special_indexes: ~5 rows (approximately)
+DELETE FROM `part_special_indexes`;
+INSERT INTO `part_special_indexes` (`id`, `Part_type`) VALUES
+	('Disel', 'Engine'),
+	('Flat engine', 'Engine'),
+	('Inline', 'Engine'),
+	('V-type', 'Engine'),
+	('Wankel', 'Engine');
+
+-- Dumping structure for table db.part_types
+CREATE TABLE IF NOT EXISTS `part_types` (
+  `id` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table db.part_display_colums: ~0 rows (approximately)
-DELETE FROM `part_display_colums`;
+-- Dumping data for table db.part_types: ~7 rows (approximately)
+DELETE FROM `part_types`;
+INSERT INTO `part_types` (`id`) VALUES
+	('Anti-roll bar'),
+	('Battery'),
+	('Car body'),
+	('Engine'),
+	('Rims'),
+	('Spring'),
+	('Tire');
 
 -- Dumping structure for table db.transporting
 CREATE TABLE IF NOT EXISTS `transporting` (
