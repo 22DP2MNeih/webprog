@@ -8,6 +8,7 @@ if (isset($_GET['part'])) {
 } else {
     $part = '';
 }
+$dynamic_data = json_encode($_GET);
 ?>
 
 <html>
@@ -23,7 +24,7 @@ if (isset($_GET['part'])) {
     </header>
     <body>
         <script src="scripts/jsisfunjee.js"></script>
-        <main class="pad_right" onload="SetUpDynamicData(<?php echo json_encode($_GET); ?>);">
+        <main class="pad_right" onload='SetUpDynamicData(<?php echo "$dynamic_data"; ?>);'>
             <div class="pad_right search">
                 <table>
                     <tr class="search">
@@ -35,13 +36,13 @@ if (isset($_GET['part'])) {
                         <?php
                         $data = GetPartIndexes($part);
                         foreach ($data as $row) {
-                            echo "<th class='search'>" . $row["Display_columns"] . "</th>";
+                            echo "<th class='search'>" . $row["Display_string"] . "</th>";
                         }
                         ?>
                     </tr>
                     <tr class="search">
                         <th class="search">
-                            <input type="text" id="part_id" list="part_list" placeholder="Part type" class="custom-select" oninput="SendDataWhenNotTyping(part_id.value, 'part');">
+                            <input <?php echo "value='$part'"; ?> type="text" id="part_id" list="part_list" placeholder="Part type" class="custom-select" oninput="SendDataWhenNotTyping(part_id.value, 'part');">
                             <datalist id="part_list">
                                 <?php GetPartTypes(); ?>
                             </datalist>
@@ -65,8 +66,9 @@ if (isset($_GET['part'])) {
                         }
                         
                         foreach ($data as $row) {
-                            $col = $row["Display_columns"];
+                            $col = $row["Display_string"];
                             $col_id = $row["Column"];
+                            $col_name = $row["Col_name"];
                             $temp;
 
                             if (isset($_GET[$col])) {
@@ -77,7 +79,7 @@ if (isset($_GET['part'])) {
 
                             // echo "<th class='search'><input type='text' id='" . $col_id . "' list='" . $col_id . "_list' placeholder='" . $col . "' class='custom-select' oninput='SendDataWhenNotTyping(" . $col_id . ".value, \x27" . $col_id . "\x27);\"><datalist id='" . $col_id . "_list'></datalist></th>";
                             $temp = <<<EOT
-                            <th class='search'><input value='$value' type='text' id='$col_id' list='{$col_id}_list' placeholder='$col' class='custom-select' oninput="SendDataWhenNotTyping($col_id.value, \x27$col\x27);"><datalist id='{$col_id}_list'></datalist></th>
+                            <th class='search'><input value='$value' type='text' id='$col_id' list='{$col_id}_list' placeholder='$col' class='custom-select' oninput="SendDataWhenNotTyping($col_id.value, \x27$col\x27);"><datalist id='{$col_id}_list'><option value="val"></option></datalist></th>
                             EOT;
                             echo $temp;
                             if ($col == $last) {
@@ -164,10 +166,12 @@ if (isset($_GET['part'])) {
             border-radius: 5px;
             border: 1px solid rgba(255, 255, 255, 0.13);
             box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.4);
-            background-color: rgb(97, 97, 255);
+            background-color: rgb(70, 70, 245);
+            /*background-color: rgb(97, 97, 255);*/
             font-size: 20px;
             color: rgb(8, 8, 8);
             width: 128px;
+            transition: background-color, 0.7s;
         }
         .custom-select:hover {
             background-color: rgb(120, 120, 255);
@@ -175,6 +179,5 @@ if (isset($_GET['part'])) {
         .custom-select::placeholder {
             color: rgb(75, 75, 75);
         }
-
     </style>
 </html>

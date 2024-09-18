@@ -20,12 +20,11 @@ function refreshPage() {
     }
     data_string += "last_input=" + last_input + "&input_i=" + last_input_i;
     console.log(data_string);
-    window.location.href = 'mehanic.php?' + encodeURI(data_string);
+    // window.location.href = encodeURI(data_string);
 }
 
 function SetUpDynamicData(url_data) {
     console.log("hey");
-    dynamic_data_map = JSON.parse(url_data);
     dynamic_data_map = JSON.parse(url_data);
     console.log(dynamic_data_map["HP"]);
     // console.log(url_data);
