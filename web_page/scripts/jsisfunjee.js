@@ -26,7 +26,7 @@ function refreshPage() {
 function SetUpDynamicData(url_data) {
     console.log("hey");
     dynamic_data_map = JSON.parse(url_data);
-    console.log(dynamic_data_map["HP"]);
+    // console.log(dynamic_data_map["HP"]);
     // console.log(url_data);
 }
 

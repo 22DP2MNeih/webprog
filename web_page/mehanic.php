@@ -9,6 +9,7 @@ if (isset($_GET['part'])) {
     $part = '';
 }
 $dynamic_data = json_encode($_GET);
+$dynamic_data_slashed = addslashes("'$dynamic_data'");
 ?>
 
 <html>
@@ -24,7 +25,7 @@ $dynamic_data = json_encode($_GET);
     </header>
     <body>
         <script src="scripts/jsisfunjee.js"></script>
-        <main class="pad_right" onload='SetUpDynamicData(<?php echo "$dynamic_data"; ?>);'>
+        <main class="pad_right" onload="SetUpDynamicData(<?php echo $dynamic_data_slashed; ?>);">
             <div class="pad_right search">
                 <table>
                     <tr class="search">
