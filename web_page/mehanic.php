@@ -3,31 +3,46 @@
 <?php 
 include "php/functions.php";
 
-if (isset($_GET['part'])) {
-    $part = urldecode($_GET['part']);
+if (isset($_GET['part_type'])) {
+    $part_type = urldecode($_GET['part_type']);
 } else {
-    $part = '';
+    $part_type = '';
 }
-$dynamic_data = json_encode($_GET);
-$dynamic_data_slashed = addslashes("'$dynamic_data'");
+
+if (isset($_GET["last_input"])) {
+    $last = urldecode($_GET['last_input']);
+} else {
+    $last = '';
+}
+$last_input_i = 0;
+if (isset($_GET["input_i"])) {
+    //trigger exception in a "try" block
+    try {
+        $last_input_i = (int) urldecode($_GET['input_i']);
+    }
+    //catch exception
+    catch(Exception $e) {
+        $last_input_i = 0;
+    }
+}
+
 ?>
 
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Car part manegment</title>
+        <link rel="icon" type="image/x-icon" href="../Img/car_parts_logo.avif">
     </head>
     <header>
-        <div class="pad_right">
-            <h1 class="glass">Car part manegment</h1>
-        </div>
+        
         
     </header>
-    <body>
+    <body onload="SetUpDynamicData('<?php echo $part_type ?>', '<?php echo $last ?>', '<?php echo $last_input_i ?>');">
         <script src="scripts/jsisfunjee.js"></script>
-        <main class="pad_right" onload="SetUpDynamicData(<?php echo $dynamic_data_slashed; ?>);">
+        <main class="pad_right">
             <div class="pad_right search">
-                <table>
+                <table id="search_table">
                     <tr class="search">
                         
                         
@@ -35,7 +50,7 @@ $dynamic_data_slashed = addslashes("'$dynamic_data'");
                             Part type
                         </th>
                         <?php
-                        $data = GetPartIndexes($part);
+                        $data = GetPartIndexes($part_type);
                         foreach ($data as $row) {
                             echo "<th class='search'>" . $row["Display_string"] . "</th>";
                         }
@@ -43,64 +58,39 @@ $dynamic_data_slashed = addslashes("'$dynamic_data'");
                     </tr>
                     <tr class="search">
                         <th class="search">
-                            <input <?php echo "value='$part'"; ?> type="text" id="part_id" list="part_list" placeholder="Part type" class="custom-select" oninput="SendDataWhenNotTyping(part_id.value, 'part');">
-                            <datalist id="part_list">
+                            <input <?php echo "value='$part_type'"; ?> type="text" id="part_type" list="part_type_list" placeholder="Part type" class="custom-select" oninput="SendDataWhenNotTyping(part_type.value, 'part_type', false);" onchange="SendDataWhenNotTyping(part_type.value, 'part_type', true);">
+                            <datalist id="part_type_list">
                                 <?php GetPartTypes(); ?>
                             </datalist>
                         </th>
                         <?php
-                        if (isset($_GET["last_input"])) {
-                            $last = urldecode($_GET['last_input']);
-                        } else {
-                            $last = '';
-                        }
-                        $last_input_i = 0;
-                        if (isset($_GET["last_input"])) {
-                            //trigger exception in a "try" block
-                            try {
-                                $last_input_i = (int) urldecode($_GET['last_input']);
-                            }
-                            //catch exception
-                            catch(Exception $e) {
-                                $last_input_i = 0;
-                            }
-                        }
-                        
+
                         foreach ($data as $row) {
                             $col = $row["Display_string"];
                             $col_id = $row["Column"];
                             $col_name = $row["Col_name"];
-                            $temp;
 
-                            if (isset($_GET[$col])) {
-                                $value = urldecode($_GET[$col]);
+                            $temp;
+                            $options = getDistinctOptions($part_type, $col_id);
+
+                            if (isset($_GET[$col_name])) {
+                                $value = urldecode($_GET[$col_name]);
                             } else {
                                 $value = '';
                             }
 
                             // echo "<th class='search'><input type='text' id='" . $col_id . "' list='" . $col_id . "_list' placeholder='" . $col . "' class='custom-select' oninput='SendDataWhenNotTyping(" . $col_id . ".value, \x27" . $col_id . "\x27);\"><datalist id='" . $col_id . "_list'></datalist></th>";
                             $temp = <<<EOT
-                            <th class='search'><input value='$value' type='text' id='$col_id' list='{$col_id}_list' placeholder='$col' class='custom-select' oninput="SendDataWhenNotTyping($col_id.value, \x27$col\x27);"><datalist id='{$col_id}_list'><option value="val"></option></datalist></th>
+                            <th class='search'><input value='$value' type='text' id='$col_name' list='{$col_name}_list' placeholder='$col' class='custom-select' oninput="SendDataWhenNotTyping($col_name.value, \x27$col_name\x27, false);" onchange="SendDataWhenNotTyping($col_name.value, \x27$col_name\x27, true);"><datalist id='{$col_name}_list'>$options</datalist></th>
                             EOT;
                             echo $temp;
-                            if ($col == $last) {
-                                $js = <<<EOT
-                                script type="text/javascript">
-                                function moveCursorTo(id, pos) {
-                                    const input = document.getElementById(id);
-                                    input.focus();  // Focus on the input
-                                    input.setSelectionRange(pos, pos);  // Set the cursor to the end
-                                }
-                                moveCursorTo($col_id, $last_input_i);
-                                </script>
-                                EOT;
-                                echo $js;
-                            }
+
                         }
                         ?>
                     </tr>
                 </table>
             </div>
+            
         </main>
     </body>
     <style>

@@ -1,0 +1,63 @@
+.bar {
+    background-color: var(--bar_height);
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: black;
+    color: rgb(20, 20, 20);
+    align-self: bottom;
+    transition: all 0.4s;
+    
+}
+
+.inner_border {
+    /*margin: 20px;*/
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 25px;
+    margin-left: 25px;
+    width: 550px;
+    height: 90%;
+}
+.chart_cell {
+    vertical-align: bottom;
+    transition: all 0.4s;
+    height: 100%;
+}
+.cell {
+    height: 80%;
+}
+
+.bar:hover {
+    transform: translate(-12px, -12px);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.chart_legend {
+    color: rgb(20, 20, 20);
+    font-size: 16px;
+    height: 22px;
+}
+
+.chart_border {
+    box-shadow: 5px, 5px, 4px, 4px rgba(0, 0, 0, 0.227);
+    border: 3px;
+    border-color: rgb(54, 54, 54);
+    background-color: rgb(176, 176, 176);
+    margin: 0px;
+    width: 600px;
+    height: 500px;
+}
+
+.chart_label {
+    font-size: 25px;
+    text-align: center;
+    color: rgb(20, 20, 20);
+}
+
+:root {
+    --good: #08c915;
+    --nodata: #aaaaaa;
+    --avrg: #ffcc00;
+    --bad: #f10000;
+    --bar_height: 100%;
+}

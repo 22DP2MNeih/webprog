@@ -4,115 +4,66 @@
     
     <head>
         <title>Car part manegment</title>
+        <link rel="icon" type="image/x-icon" href="../Img/car_parts_logo.avif">
     </head>
-    <header>
+    
+    <body>
+        <header>
         <div class="Title">
-            
-            <h1>Car part manegment</h1>
+            <div style="padding-right: 20px;">
+                <h1 class="glass">Car part<br>      manegment</h1>
+            </div>
         </div>
-    </header>
-    <body onload="focusInput()">
+        </header>
         <main>
+            <!-- <img src="../Img/car_parts_logo.avif"> -->
+             <div class="cropped-image">
+
+             </div>
             <h5><a href="login.html">link text</a></h5>
             <script src="scripts\jsisfunjee.js" type="text/javascript"></script>
         </main>
     </body>
     <style>
-        /*h1 {
-            position: absolute;
-            font-size: 80px;
-            font-weight: bolder;
-            text-align: center;
-            align-self: center;
-            /*color: rgb(20, 20, 80);*//*
-            color: transparent;
-            background-color: rgb(135, 135, 135);
-        }*/
-        h5 {
-            font-weight: bold;
-        }
-
-        /*div.Title {
-            position: relative;
-            background-image: url(../img/background2.jpg) no-repeat;
-            background-image: 
-        }*/
-
-        div {
-            width: 100%;
-            height: 100%;
-        }
-
-        h1 {
-            color: transparent;
-            /*font-size: 28vmax;*/
-            font-size: 70px;
-            background-size: cover;
-            background: url(../img/background2.jpg) 0% 0 no-repeat;
-            background-clip: text;
-            font-weight: bolder;
-        }
-
-        body {
-            background-size: 200%;
-            background: url(../img/background2.jpg) 0% 0 no-repeat;
-        }
-        
-        .bg {
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-                
-            /* Preserve aspet ratio */
-            min-width: 100%;
-            min-height: 100%;
-            margin-left: 25%;
-        }
-        img.bg {
-        /* Set rules to fill background */
-        min-height: 100%;
-        min-width: 1200px;
-            
-        /* Set up proportionate scaling */
-        width: 100%;
-        height: auto;
-            
-        /* Set up positioning */
-        position: fixed;
-        top: 0;
-        left: 0;
-        }
-
-        @media screen and (max-width: 1200px) { /* Specific to this particular image */
-        img.bg {
-            left: 50%;
-            margin-left: -600px;   /* 50% */
-        }
-        }
-        body {
-            background: url(../img/background3.webp) no-repeat;
-            background-size: 100%;
-            /*background-position-y: -20%;*/
-            overflow: hidden;
-        }
-
-        .custom-select {
-            border-radius: 5px;
+        .glass {
+            background: rgba(255, 255, 255, 0.28);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.13);
-            box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.4);
-            background-color: rgb(70, 70, 245);
-            /*background-color: rgb(97, 97, 255);*/
-            font-size: 20px;
-            color: rgb(8, 8, 8);
-            width: 128px;
-            transition: background-color, 0.7s;
-        }
-        .custom-select:hover {
-            background-color: rgb(120, 120, 255);
-        }
-        .custom-select::placeholder {
-            color: rgb(75, 75, 75);
+            box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+            font-size: 80px;
+            text-align: center;
+            color: rgb(42, 42, 252);
         }
 
+        body {
+            background-color: rgb(116, 176, 245);
+        }
+
+        :root {
+
+            --image-size: 400px;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
+        .cropped-image {
+            width: var(--image-size);
+            height: var(--image-size);
+
+            background-image: url("../Img/car_parts_logo.avif");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            border-radius: 25% 75% / 50%;
+            cursor: help;
+        }
     </style>
 </html>

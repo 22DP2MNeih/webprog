@@ -55,4 +55,25 @@ function GetPartIndexes($part) {
 // function DistinctColData($part, $col) {
 //     $stmt = $mysqli->prepare("SELECT Display_columns FROM part_display_colums WHERE Part_type = ?;");
 // }
+
+function getDistinctOptions($part, $col) {
+    global $mysqli;
+
+    // prepare and bind
+    $stmt = $mysqli->prepare("SELECT * FROM carparts WHERE Part_type = ?;");
+
+    $stmt->bind_param("s", $part);
+    $stmt->execute();
+    // set parameters and execute
+    
+    $result = $stmt->get_result();
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+
+    $output_str = "";
+    foreach ($data as $row) {
+        $output_str = $output_str . "<option value=" . $row[$col] . "></option>";
+    }
+
+    return $output_str;
+}
 ?>

@@ -15,11 +15,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Dumping database structure for db
-CREATE DATABASE IF NOT EXISTS `db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `db`;
+-- Dumping database structure for warehause
+CREATE DATABASE IF NOT EXISTS `warehouse` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `warehouse`;
 
--- Dumping structure for table db.carparts
+-- Dumping structure for table warehause.carparts
 CREATE TABLE IF NOT EXISTS `carparts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `Part_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -70,8 +70,7 @@ CREATE TABLE IF NOT EXISTS `carparts` (
   CONSTRAINT `FK_carparts_part_types` FOREIGN KEY (`Part_type`) REFERENCES `part_types` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table db.carparts: ~9 rows (approximately)
-DELETE FROM `carparts`;
+-- Dumping data for table warehause.carparts: ~9 rows (approximately)
 INSERT INTO `carparts` (`id`, `Part_name`, `Part_description`, `Image`, `VIN`, `Count`, `Part_type`, `Color`, `Weight`, `Width`, `Hight`, `Depth`, `Size`, `Voltage`, `Capacity`, `Tire code`, `Stiffness_min`, `Stiffness_max`, `Stiffness_adjustable`, `Hight_min`, `Hight_max`, `Hight_adjustable`, `Egine_type`, `Max_pressure`, `Cylidders`, `HP`, `Displacement`, `Torqe`, `Max_rpm`, `Int0`, `Float0`, `Float1`, `Float2`, `Float3`, `Float4`, `Float5`, `Float6`, `Float7`, `Bool0`, `Bool1`, `Str0`, `Special_index0`) VALUES
 	(1, 'Sudraba krāsas diski', 'Liela izmēra pelēkie diski', NULL, 'JN3MS37AP', 24, 'Rims', 'Sudraba', 0, 0, 0, 0, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Sudraba', NULL),
 	(2, 'Pielāgojamas atsperes', 'Pielāgojamas sporta atsperes', NULL, NULL, 64, 'Spring', 'Melns', 0, 0, 0, 0, NULL, NULL, NULL, NULL, 20, 40, b'1', 30, 40, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 20, 40, 30, 40, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL),
@@ -83,7 +82,7 @@ INSERT INTO `carparts` (`id`, `Part_name`, `Part_description`, `Image`, `VIN`, `
 	(8, 'Krutākie melnie diski', 'Melnie diski kas izcels katru auto', NULL, 'JN3MS37AP', 12, 'Rims', 'Melns', 0, 0, 0, 0, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Melna', NULL),
 	(9, 'Krutākie melnie diski2', 'Melnie diski kas izcels katru auto', NULL, 'JN3MS37AP', 12, 'Rims', 'Melns', 0, 0, 0, 0, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Melna', NULL);
 
--- Dumping structure for table db.companies
+-- Dumping structure for table warehause.companies
 CREATE TABLE IF NOT EXISTS `companies` (
   `id` int NOT NULL AUTO_INCREMENT,
   `Company_name` varchar(50) NOT NULL,
@@ -97,8 +96,7 @@ CREATE TABLE IF NOT EXISTS `companies` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table db.companies: ~8 rows (approximately)
-DELETE FROM `companies`;
+-- Dumping data for table warehause.companies: ~8 rows (approximately)
 INSERT INTO `companies` (`id`, `Company_name`, `Location`, `Latitude`, `Longitude`, `Has_import`, `Has_export`, `Has_shipping`, `Export_tax`) VALUES
 	(1, 'BMW', 'On Earth', 0, 0, b'1', b'1', b'1', 0.200000),
 	(2, 'WV', 'Someweare', 0, 0, b'1', b'1', b'1', 0.150000),
@@ -109,15 +107,14 @@ INSERT INTO `companies` (`id`, `Company_name`, `Location`, `Latitude`, `Longitud
 	(7, 'Mustang', '??', 0, 0, b'1', b'1', b'0', 0.220000),
 	(8, 'Mazda', '???', 0, 0, b'0', b'1', b'0', 0.180000);
 
--- Dumping structure for table db.display_colums
+-- Dumping structure for table warehause.display_colums
 CREATE TABLE IF NOT EXISTS `display_colums` (
   `id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Data_type` enum('Int','Float','Bool','Special_index','str') NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table db.display_colums: ~22 rows (approximately)
-DELETE FROM `display_colums`;
+-- Dumping data for table warehause.display_colums: ~22 rows (approximately)
 INSERT INTO `display_colums` (`id`, `Data_type`) VALUES
 	('Capacity', 'Float'),
 	('Color', 'str'),
@@ -142,7 +139,7 @@ INSERT INTO `display_colums` (`id`, `Data_type`) VALUES
 	('Weight', 'Float'),
 	('Width', 'Float');
 
--- Dumping structure for table db.exporting
+-- Dumping structure for table warehause.exporting
 CREATE TABLE IF NOT EXISTS `exporting` (
   `id` int NOT NULL AUTO_INCREMENT,
   `Company` int NOT NULL DEFAULT '0',
@@ -155,8 +152,7 @@ CREATE TABLE IF NOT EXISTS `exporting` (
   CONSTRAINT `FK_exporting_carparts` FOREIGN KEY (`Part`) REFERENCES `carparts` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table db.exporting: ~5 rows (approximately)
-DELETE FROM `exporting`;
+-- Dumping data for table warehause.exporting: ~5 rows (approximately)
 INSERT INTO `exporting` (`id`, `Company`, `Part`, `Price`) VALUES
 	(1, 1, 2, 276.000000),
 	(2, 1, 5, 252.000000),
@@ -164,7 +160,7 @@ INSERT INTO `exporting` (`id`, `Company`, `Part`, `Price`) VALUES
 	(4, 3, 6, 89.680000),
 	(5, 2, 6, 82.800000);
 
--- Dumping structure for table db.importing
+-- Dumping structure for table warehause.importing
 CREATE TABLE IF NOT EXISTS `importing` (
   `id` int NOT NULL AUTO_INCREMENT,
   `Company` int NOT NULL DEFAULT '0',
@@ -173,10 +169,9 @@ CREATE TABLE IF NOT EXISTS `importing` (
   CONSTRAINT `FK__companies2` FOREIGN KEY (`Company`) REFERENCES `companies` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table db.importing: ~0 rows (approximately)
-DELETE FROM `importing`;
+-- Dumping data for table warehause.importing: ~0 rows (approximately)
 
--- Dumping structure for table db.pardosanas_dokuments
+-- Dumping structure for table warehause.pardosanas_dokuments
 CREATE TABLE IF NOT EXISTS `pardosanas_dokuments` (
   `id` int NOT NULL,
   `Part` int NOT NULL,
@@ -194,25 +189,23 @@ CREATE TABLE IF NOT EXISTS `pardosanas_dokuments` (
   CONSTRAINT `FK_pardosanas_dokuments_companies_3` FOREIGN KEY (`Transport`) REFERENCES `companies` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table db.pardosanas_dokuments: ~0 rows (approximately)
-DELETE FROM `pardosanas_dokuments`;
+-- Dumping data for table warehause.pardosanas_dokuments: ~0 rows (approximately)
 
--- Dumping structure for table db.part_display_colums
+-- Dumping structure for table warehause.part_display_colums
 CREATE TABLE IF NOT EXISTS `part_display_colums` (
   `id` int NOT NULL AUTO_INCREMENT,
   `Part_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
-  `Display_columns` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
+  `Display_string` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
   `Column_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `Part_type` (`Part_type`),
-  KEY `Display_columns` (`Display_columns`),
-  CONSTRAINT `FK_part_display_colums_display_colums` FOREIGN KEY (`Display_columns`) REFERENCES `display_colums` (`id`),
+  KEY `Display_columns` (`Display_string`) USING BTREE,
+  CONSTRAINT `FK_part_display_colums_display_colums` FOREIGN KEY (`Display_string`) REFERENCES `display_colums` (`id`),
   CONSTRAINT `FK_part_display_colums_part_types` FOREIGN KEY (`Part_type`) REFERENCES `part_types` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table db.part_display_colums: ~24 rows (approximately)
-DELETE FROM `part_display_colums`;
-INSERT INTO `part_display_colums` (`id`, `Part_type`, `Display_columns`, `Column_id`) VALUES
+-- Dumping data for table warehause.part_display_colums: ~24 rows (approximately)
+INSERT INTO `part_display_colums` (`id`, `Part_type`, `Display_string`, `Column_id`) VALUES
 	(1, 'Rims', 'Size', 0),
 	(2, 'Rims', 'Color', 0),
 	(3, 'Tire', 'Tire code', 0),
@@ -238,7 +231,7 @@ INSERT INTO `part_display_colums` (`id`, `Part_type`, `Display_columns`, `Column
 	(23, 'Battery', 'Capacity', 1),
 	(24, 'Battery', 'Voltage', 0);
 
--- Dumping structure for table db.part_special_indexes
+-- Dumping structure for table warehause.part_special_indexes
 CREATE TABLE IF NOT EXISTS `part_special_indexes` (
   `id` varchar(20) NOT NULL DEFAULT '',
   `Part_type` varchar(20) NOT NULL,
@@ -247,8 +240,7 @@ CREATE TABLE IF NOT EXISTS `part_special_indexes` (
   CONSTRAINT `FK_part_special_indexes_part_types` FOREIGN KEY (`Part_type`) REFERENCES `part_types` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table db.part_special_indexes: ~5 rows (approximately)
-DELETE FROM `part_special_indexes`;
+-- Dumping data for table warehause.part_special_indexes: ~5 rows (approximately)
 INSERT INTO `part_special_indexes` (`id`, `Part_type`) VALUES
 	('Disel', 'Engine'),
 	('Flat engine', 'Engine'),
@@ -256,14 +248,13 @@ INSERT INTO `part_special_indexes` (`id`, `Part_type`) VALUES
 	('V-type', 'Engine'),
 	('Wankel', 'Engine');
 
--- Dumping structure for table db.part_types
+-- Dumping structure for table warehause.part_types
 CREATE TABLE IF NOT EXISTS `part_types` (
   `id` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table db.part_types: ~7 rows (approximately)
-DELETE FROM `part_types`;
+-- Dumping data for table warehause.part_types: ~0 rows (approximately)
 INSERT INTO `part_types` (`id`) VALUES
 	('Anti-roll bar'),
 	('Battery'),
@@ -273,7 +264,7 @@ INSERT INTO `part_types` (`id`) VALUES
 	('Spring'),
 	('Tire');
 
--- Dumping structure for table db.transporting
+-- Dumping structure for table warehause.transporting
 CREATE TABLE IF NOT EXISTS `transporting` (
   `id` int NOT NULL AUTO_INCREMENT,
   `Company` int NOT NULL DEFAULT '0',
@@ -282,10 +273,9 @@ CREATE TABLE IF NOT EXISTS `transporting` (
   CONSTRAINT `FK__companies3` FOREIGN KEY (`Company`) REFERENCES `companies` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table db.transporting: ~0 rows (approximately)
-DELETE FROM `transporting`;
+-- Dumping data for table warehause.transporting: ~0 rows (approximately)
 
--- Dumping structure for table db.warehouse
+-- Dumping structure for table warehause.warehouse
 CREATE TABLE IF NOT EXISTS `warehouse` (
   `id` int NOT NULL AUTO_INCREMENT,
   `Company` int NOT NULL,
@@ -299,8 +289,7 @@ CREATE TABLE IF NOT EXISTS `warehouse` (
   CONSTRAINT `FK__companies` FOREIGN KEY (`Company`) REFERENCES `companies` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table db.warehouse: ~7 rows (approximately)
-DELETE FROM `warehouse`;
+-- Dumping data for table warehause.warehouse: ~7 rows (approximately)
 INSERT INTO `warehouse` (`id`, `Company`, `Car_part`, `Count`, `Price`) VALUES
 	(1, 8, 4, 5, 550.000000),
 	(2, 1, 5, 21, 210.000000),

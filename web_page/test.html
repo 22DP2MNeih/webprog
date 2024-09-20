@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Move Circle</title>
+  <style>
+    body {
+      display: grid;
+      place-items: center;
+    }
+    .circle {
+      width: 100px;
+      height: 100px;
+      background-color: #2A1F2D;
+      border-radius: 50%;
+
+      --xA: 10px;
+      --yA: 10px;
+      --xB: 30px;
+      --yB: 30px;
+
+      animation-name: moveCircle;
+      animation-duration: 10s;
+      animation-iteration-count: 1;
+      /*animation-timing-function: cubic-bezier(.17, .67, .4, 1.31);*/
+      animation-timing-function: cubic-bezier(0.17, 0, 0.35, 1);;
+    }
+    .container {
+      width: 500px;
+      height: 500px;
+      border: 5px solid #111;
+      overflow: hidden;
+      background-color: #EDFF86;
+    }
+
+    @keyframes moveCircle {
+      0% {
+        transform: translate3d(var(--xA), var(--yA), 0);
+      }
+      100% {
+        transform: translate3d(var(--xB), var(--yB), 0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="circle"></div>
+  </div>
+
+  <script>
+    let container = document.querySelector(".container");
+    container.addEventListener("animationend", changePosition, true);
+
+    function changePosition(event) {
+      let circle = event.target;
+
+      circle.style.animationName = "none";
+      
+      requestAnimationFrame(() => {
+        circle.style.animationName = "";
+      });
+
+      let circleStyle = getComputedStyle(circle);
+      let finalX = circleStyle.getPropertyValue("--xB");
+      let finalY = circleStyle.getPropertyValue("--yB");
+
+      circle.style.setProperty("--xA", finalX);
+      circle.style.setProperty("--yA", finalY);
+
+      circle.style.setProperty("--xB", getRandomNumber(-100, 600) + "px");
+      circle.style.setProperty("--yB", getRandomNumber(-100, 600) + "px");
+
+      console.log(circle);
+    }
+
+    function getRandomNumber(low, high) {
+      let r = Math.floor(Math.random() * (high - low + 1)) + low;
+      return r;
+    }
+  </script>
+</body>
+</html>
