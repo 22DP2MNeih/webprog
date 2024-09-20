@@ -69,23 +69,19 @@
                 <div class="chart_label">This is chart!</div>
                 <table class="inner_border", id="chart1">
                     <tr>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div></th>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div></th>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div></th>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div></th>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div></th>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div></th>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div></th>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div></th>
+                        <th class="cell"><div class="chart_cell"><div class="bar"><span class="details_info">Detiled info:</span></div></div></th>
+                        <th class="cell"><div class="chart_cell"><div class="bar"><span class="details_info">Detiled info:</span></div></div></th>
+                        <th class="cell"><div class="chart_cell"><div class="bar"><span class="details_info">Detiled info:</span></div></div></th>
+                        <th class="cell"><div class="chart_cell"><div class="bar"><span class="details_info">Detiled info:</span></div></div></th>
+                        <th class="cell"><div class="chart_cell"><div class="bar"><span class="details_info">Detiled info:</span></div></div></th>
+                        <th class="cell"><div class="chart_cell"><div class="bar"><span class="details_info">Detiled info:</span></div></div></th>
+                        <th class="cell"><div class="chart_cell"><div class="bar"><span class="details_info">Detiled info:</span></div></div></th>
+                        <th class="cell"><div class="chart_cell"><div class="bar"><span class="details_info">Detiled info:</span></div></div></th>
                     <tr>
-                        <th class="chart_legend">col1</th>
-                        <th class="chart_legend">col2</th>
-                        <th class="chart_legend">col3</th>
-                        <th class="chart_legend">col4</th>
-                        <th class="chart_legend">col5</th>
-                        <th class="chart_legend">col6</th>
-                        <th class="chart_legend">col7</th>
-                        <th class="chart_legend">col8</th>
+                        <th class="chart_legend" colspan="2">col1</th>
+                        <th class="chart_legend" colspan="2">col2</th>
+                        <th class="chart_legend" colspan="2">col3</th>
+                        <th class="chart_legend" colspan="2">col4</th>
                     </tr>
                 </table>
             </div>
