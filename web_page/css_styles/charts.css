@@ -1,13 +1,33 @@
+.float {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+}
+.twoline {
+    width: 50px;
+    display: table-cell;
+}
+/*div {
+    display: table;
+    border: solid 1px blue;
+    width: 500px;
+    height: 100px;
+}*/
+
 .bar {
-    background-color: var(--bar_height);
+    /*background-color: var(--bar_height);*/
     border-radius: 5px;
     border-width: 1px;
     border-color: black;
+    /* border: 3px solid black; */
     color: rgb(20, 20, 20);
-    align-self: bottom;
     transition: all 0.4s;
-    
+    width: 100%;
+    /*display: table-cell;*/
+    display: inline;
+    align-self: flex-end;
 }
+
 
 .inner_border {
     /*margin: 20px;*/
@@ -22,6 +42,9 @@
     vertical-align: bottom;
     transition: all 0.4s;
     height: 100%;
+    display: flex;
+    width: 100%;
+    /*transform: rotate(180deg);*/
 }
 .cell {
     height: 80%;
@@ -29,7 +52,7 @@
 
 .bar:hover {
     transform: translate(-12px, -12px);
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 4px rgba(0, 0, 0, 0.75);
 }
 
 .chart_legend {
