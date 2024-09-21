@@ -16,6 +16,9 @@
 .bar_cell {
     width: 100%;
     border-radius: inherit;
+    transition: all var(--bar_animation_duration);
+    height: var(--bar_cell_height);
+    /* height: 70%; */
 }
 .chart_cell:hover {
     transform: translateY(var(--bar_cell_y_transform));
@@ -53,23 +56,24 @@
     /*transform: rotate(180deg);*/
 }
 
-* { 
-    -moz-box-sizing: border-box; 
-    -webkit-box-sizing: border-box; 
-     box-sizing: border-box; 
+* {
+    -moz-box-sizing: border-box;
+    /* -webkit-box-sizing: border-box; */
+    box-sizing: border-box;
 }
 
 .chart_cell:hover {
-    /*position:relative;*/
+    position:relative;
     transition: all var(--bar_animation_duration);
     /* height: 110%;
     width: 130%; */
     /*transform: rotate(180deg);*/
-    bottom: 2.5%;
-    right: 5%;
+    /* bottom: 2.5%;
+    right: 5%; */
     /* padding: 20%, 2%; */
-    transform: scaleY(1.1);
-    transform: scaleX(1.2);
+    /* transform: scaleY(1.1);
+    transform: scaleX(1.2); */
+    transform: scaleX(1.5);
 }
 .cell {
     height: 80%;
@@ -111,6 +115,10 @@
     --bad: #f10000;
     --bar_height: 100%;
     --bar_animation_duration: 0.4s;
+    --bar_cell_margin_y: 10px;
+    --bar_cell_dist_y: 0px;
+    --bar_cell_cnt: 1;
+    --bar_cell_height: 100%;
 }
 
 
@@ -158,9 +166,14 @@
 
 .chart_cell:hover .bar {
     position: relative;
-    transform: translate(-12px, -12px);
-    box-shadow: 10px 10px 5px 4px rgba(0, 0, 0, 0.75);
-    margin: 20% 5%;
+    /* box-shadow: 10px 10px 5px 4px rgba(0, 0, 0, 0.75); */
+    margin: var(--bar_cell_margin_y) 5px;
 }/*style="height: 10.1%; background-color: red;"*/
 
-
+.chart_cell:hover .bar_cell {
+    position: relative;
+    box-shadow: 10px 10px 5px 4px rgba(0, 0, 0, 0.75);
+    transform: translate(-12px, -12px);
+    margin: var(--bar_cell_margin_y) 0px;
+    height: calc(var(--bar_cell_height) - var(--bar_cell_margin_y) / var(--bar_cell_cnt) * (var(--bar_cell_cnt) - 1));
+}/*style="height: 10.1%; background-color: red;"*/
