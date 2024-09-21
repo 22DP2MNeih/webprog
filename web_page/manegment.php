@@ -69,17 +69,10 @@
                 <div class="chart_label">This is chart!</div>
                 <table class="inner_border", id="chart1">
                     <tr>
-                        
 
+                    </tr>
                     <tr>
-                        <th class="chart_legend" colspan="1">col1</th>
-                        <th class="chart_legend" colspan="1">col2</th>
-                        <th class="chart_legend" colspan="1">col3</th>
-                        <th class="chart_legend" colspan="1">col4</th>
-                        <th class="chart_legend" colspan="1">col5</th>
-                        <th class="chart_legend" colspan="1">col6</th>
-                        <th class="chart_legend" colspan="1">col7</th>
-                        <th class="chart_legend" colspan="1">col8</th>
+                        
                     </tr>
                 </table>
             </div>

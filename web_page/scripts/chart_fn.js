@@ -6,7 +6,7 @@ function setUpChart() {
     // // Set the value of variable --blue to another value (in this case "lightblue")
     // css_root.style.setProperty('--bar_hight', 100);
     let chart = document.getElementById("chart1");
-    let columns = chart.rows[0].cells;
+    // let columns = chart.rows[0].cells;
     // let col_cnt = chart.rows[0].cells.length;
     // let color_arr = ["red", "green", "blue", "yellow", "purple", "orange", "black", "aqua"];
     // for (let i = 0; i < col_cnt; i++) {
@@ -24,8 +24,8 @@ function setUpChart() {
     const cols = 8;
     let html_string = "";
     for (let i = 0; i < cols; i++) {
-        let good_percentage = Math.floor(Math.random() * 80);
-        let second_bar = Math.floor(Math.random() * 100);
+        let good_percentage = Math.floor(Math.random() * 80) + 1;
+        let second_bar = Math.floor(Math.random() * 100) + 1;
         let data_points = Math.floor(Math.random() * 1000);
         html_string +=`
         <th class="cell">
@@ -52,5 +52,10 @@ function setUpChart() {
         </th>`;
     }
     chart.rows[0].innerHTML += html_string;
+    html_string = "";
+    for (let i = 0; i < cols; i++) {
+        html_string += "<th class='chart_legend'>col" + (i + 1) + "</th>";
+    }
+    chart.rows[1].innerHTML += html_string;
     
 }
