@@ -77,6 +77,7 @@
 }
 .cell {
     height: 80%;
+    position: relative;
 }
 
 /*.bar:hover {
@@ -93,6 +94,7 @@
 }
 
 .chart_border {
+    position: relative;
     box-shadow: 5px, 5px, 4px, 4px rgba(0, 0, 0, 0.227);
     border: 3px;
     border-color: rgb(54, 54, 54);
@@ -100,6 +102,7 @@
     margin: 0px;
     width: 600px;
     height: 550px;
+    left: 250px;
 }
 
 .chart_label {
@@ -135,14 +138,15 @@
     text-align: center;
     /* text-transform: uppercase; */
     top: 50%;
-    left: -135px;
+    left: -155px;
     transform: translateY(-50%);
-    display:none;
+    /* display:none; */
     /* padding:0 20px; */
-    width: 100px;
-    height: 120px;
+    display: none;
+    width: 120px;
+    height: 140px;
 }
-.details_info:after{
+.details_info:after .details_info2:after{
     content: '';
     position: absolute;
     top: 50%;
@@ -159,10 +163,39 @@
     transform: rotate(-45deg);
     transform: translateY(-50%) rotate(-45deg);
 }
+.chart_cell_border {
+    width: 100%;
+    height: 100%;
+}
 
-.chart_cell:hover > .details_info{
+.details_info2 {
+    position:absolute;
+    width: 140px;
+    height: 170px;
+    display: none;
+    background:#F8F8F8;
+    border: 5px solid #DFDFDF;
+    color: #717171;
+    font-size: 13px;
+    letter-spacing: 1px;
+    line-height: 30px;
+    text-align: left;
+    /* text-transform: uppercase; */
+    top: 50%;
+    left: -200px;
+    transform: translateY(-50%);
+}
+
+
+.chart_cell:hover ~ .details_info2{
     display:block;
 }
+/*
+.chart_cell:hover ~ .details_div {
+    height: 10%;
+    width: 200%;
+    background-color: aqua;
+} */
 
 .chart_cell:hover .bar {
     position: relative;
@@ -173,7 +206,7 @@
 .chart_cell:hover .bar_cell {
     position: relative;
     box-shadow: 10px 10px 5px 4px rgba(0, 0, 0, 0.75);
-    transform: translate(-12px, -12px);
+    transform: translate(-12px, calc(-12px - var(--bar_cell_margin_y) * (var(--bar_cell_cnt) - 1)));
     margin: var(--bar_cell_margin_y) 0px;
-    height: calc(var(--bar_cell_height) - var(--bar_cell_margin_y) / var(--bar_cell_cnt) * (var(--bar_cell_cnt) - 1));
+    height: calc(var(--bar_cell_height));
 }/*style="height: 10.1%; background-color: red;"*/

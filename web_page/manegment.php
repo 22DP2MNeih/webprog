@@ -69,55 +69,17 @@
                 <div class="chart_label">This is chart!</div>
                 <table class="inner_border", id="chart1">
                     <tr>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div><span class="details_info">Detiled info:</span></th>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div><span class="details_info">Detiled info:</span></th>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div><span class="details_info">Detiled info:</span></th>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div><span class="details_info">Detiled info:</span></th>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div><span class="details_info">Detiled info:</span></th>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div><span class="details_info">Detiled info:</span></th>
-                        <th class="cell"><div class="chart_cell"><div class="bar"></div></div><span class="details_info">Detiled info:</span></th>
-                        <th class="cell">
-                            <div class="chart_cell">
-                                <div class="bar" style="
-                                    height: 100%;
-                                    background-color: aqua;
-                                ">
-                                    <div class="bar_cell" style="
-                                        --bar_cell_height: 70%;
-                                        --bar_cell_cnt: 2;
-                                        background-color: blueviolet;
-                                    ">
+                        
 
-                                    </div>
-                                    <div class="bar_cell" style="
-                                        --bar_cell_height: 30%;
-                                        --bar_cell_cnt: 2;
-                                        background-color: chartreuse;
-                                    ">
-
-                                    </div>
-                                </div>
-                                <div class="bar" style="
-                                    height: 20%;"
-                                >
-                                    <div class="bar_cell" style="
-                                        background-color: crimson;
-                                    ">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="details_info">Detiled info:</span>
-                        </th>
                     <tr>
                         <th class="chart_legend" colspan="1">col1</th>
                         <th class="chart_legend" colspan="1">col2</th>
                         <th class="chart_legend" colspan="1">col3</th>
                         <th class="chart_legend" colspan="1">col4</th>
-                        <th class="chart_legend" colspan="1">col1</th>
-                        <th class="chart_legend" colspan="1">col2</th>
-                        <th class="chart_legend" colspan="1">col3</th>
-                        <th class="chart_legend" colspan="1">col4</th>
+                        <th class="chart_legend" colspan="1">col5</th>
+                        <th class="chart_legend" colspan="1">col6</th>
+                        <th class="chart_legend" colspan="1">col7</th>
+                        <th class="chart_legend" colspan="1">col8</th>
                     </tr>
                 </table>
             </div>
