@@ -45,14 +45,30 @@ div {
 
 <div>
   <form>
-    <label for="fname">First Name</label>
-    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+    <label for="email">First Name</label>
+    <input type="text" id="email" name="e-mail" placeholder="Your email...">
+
+    <label for="fname">Last Name</label>
+    <input type="text" id="fname" name="first-name" placeholder="Your first name...">
 
     <label for="lname">Last Name</label>
-    <input type="text" id="lname" name="last-name" placeholder="Your last name..">
+    <input type="text" id="lname" name="last-name" placeholder="Your last name...">
 
-    <label for="country">Country</label>
-    <select id="country" name="country">
+    <label for="pass1">Last Name</label>
+    <input type="text" id="pass1" name="password1" placeholder="Your password...">
+
+    <label for="pass2">Last Name</label>
+    <input type="text" id="pass2" name="password2" placeholder="Confirm your password...">
+
+    <label for="company">Company</label>
+    <select id="company" name="Company">
+      <option value="australia">Australia</option>
+      <option value="canada">Canada</option>
+      <option value="usa">USA</option>
+    </select>
+
+    <label for="profesion">Profesion</label>
+    <select id="profesion" name="Profesion">
       <option value="australia">Australia</option>
       <option value="canada">Canada</option>
       <option value="usa">USA</option>
@@ -61,7 +77,7 @@ div {
     <input type="submit" value="Submit">
   </form>
 </div>
-<h5><a href="mehanic.html">link text</a></h5>
+<h5><a href="mehanic.php">link text</a></h5>
 </body>
 </html>
 
