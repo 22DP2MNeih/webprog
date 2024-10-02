@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Car part manegment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="../Img/car_parts_logo.avif">
+    <link rel="stylesheet" href="css_styles/darkmode_btn.css">
+    <style>
+      header{
+        width: 100%;
+        font-size: medium;
+        transition: all var(--darkmode-transition-time);
+        background-color: var(--header-footer-background-color);
+      }
+
+      footer {
+        position: absolute; 
+        bottom: 0%; 
+        width: 100%;
+        transition: all var(--darkmode-transition-time);
+        background-color: var(--header-footer-background-color);
+      }
+
+      .flex-container {
+        display: flex;
+        flex-wrap: nowrap;
+        /* background-color: #f1f1f1; */
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+      }
+
+      /* .darkmode-checkbox {
+        position: absolute;
+        width: 120px;
+        height: 40px;
+        right: 20px;
+        text-align: center;
+      } */
+      .darkmode-checkbox {
+        position: absolute;
+        width: 120px;
+        height: 40px;
+        right: 20px;
+        text-align: center;
+        background-color: conic-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 80%, rgba(5,106,185,1) 90%);
+      }
+      /* The container */
+      .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      /* Hide the browser's default checkbox */
+      .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+
+      /* Create a custom checkbox */
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+      }
+
+      /* On mouse-over, add a grey background color */
+      .container:hover input ~ .checkmark {
+        background-color: #ccc;
+      }
+
+      /* When the checkbox is checked, add a blue background */
+      .container input:checked ~ .checkmark {
+        background-color: #2196F3;
+        /* background-color: #222; */
+      }
+      
+      /* Create the checkmark/indicator (hidden when not checked) */
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+
+      /* Show the checkmark when checked */
+      .container input:checked ~ .checkmark:after {
+        display: block;
+      }
+
+      /* Style the checkmark/indicator */
+      .container .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+      .btn {
+        width: 120px;
+        height: 30px;
+        background-color: rgb(0, 87, 248);
+        color: rgba(240, 240, 240, 0.896);
+        margin: 10px;
+        text-align: center;
+        padding: 8px;
+        transition: all 0.4s;
+        border-radius: 7px;
+      }
+
+      .btn:hover {
+        background-color: rgb(3, 0, 178);
+      }
+      
+
+      .autortiesibas {
+        width: 200px;
+        height: 30px;
+        color: var(--text-color);
+        margin: 10px;
+        text-align: center;
+        padding: 8px;
+        transition: all var(--darkmode-transition-time);
+      }
+
+      body html {
+        width: 100%;
+        height: 100%;
+      }
+
+      html {
+        background-color: var(--page-background-color);
+        transition: all var(--darkmode-transition-time);
+      }
+
+      h1 {
+        font-size: xx-large;
+        color: var(--text-color);
+        transition: all var(--darkmode-transition-time);
+      }
+      .card-lvl1 {
+        position: relative;
+        width: 300px;
+        height: 440px;
+        padding: 0px;
+        margin: 40px;
+        display: block;
+        transition: all 0.6s;
+      }
+      .card-lvl2 {
+        position: absolute;
+        width: 300px;
+        height: 440px;
+        padding: 0px;
+        background-color: var(--card-background-color);
+        margin: 0px;
+        text-align: center;
+        transition: all 0.6s;
+        border-radius: 10px;
+        color: var(--text-color);
+      }
+
+      .card-lvl2 > img {
+        width: 100%;
+        height: 40%;
+        border-radius: 10px 10px 0px 0px;
+      }
+
+      .card-lvl2 > p {
+        margin: 15px;
+        font-size: 20px;
+      }
+      .card-lvl2 > h3 {
+        margin: 15px;
+        font-size: 35px;
+      }
+
+      .card-lvl2 > button {
+        /* height: 30px;
+        
+        border-radius: 7px; */
+        width: 200px;
+        height: 50px;
+        position: absolute;
+        font-size: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 5%;
+      }
+
+      @keyframes move-up {
+        0%   {top: 0px; background: var(--card-background-color);}
+        15%  {top: 10px;}
+        35%  {top: 0px;}
+        50%  {top: 10px; background: rgb(128, 0, 255);}
+        65%  {top: 0px;}
+        85%  {top: 10px;}
+        100% {top: 0px; background: var(--card-background-color);}
+      }
+      .card-lvl1:hover > .card-lvl2 {
+        transform: translateY(-25px);
+        animation: move-up 2s;
+        animation-iteration-count: infinite;
+        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+      }
+
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+
+      /* Modal Content */
+      /* .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+      } */
+
+      /* The Close Button */
+      .close {
+        position: absolute;
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        right: 12px;
+        top: 9px;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      /* h1 {
+        /* font-size: 40px; *//*
+      } */
+      .more_info_tbl {
+        position: absolute;
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 80%, rgba(5,106,185,1) 90%);
+        margin: 0px;
+        padding: 25px;
+        border-radius: 10px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .more_info_tbl img {
+        border-radius: 10px;
+      }
+
+      :root {
+        --header-footer-background-color: #f1f1f1;
+        --card-background-color: rgb(2, 167, 227);
+        --page-background-color: rgb(190, 237, 255);
+        --text-color: rgb(10, 10, 10);
+        --darkmode-transition-time: 0.7s;
+        --darkmode-btn-bg-color: var(--header-footer-background-color);
+        --darkmode-btn-color: rgb(255, 225, 0);
+        --dm-btn-size: 3rem;
+      }
+      :root:has(.darkmode-btn-container input:checked){
+        --card-background-color: rgb(60,60,60);
+        --header-footer-background-color: rgb(40, 40, 40);
+        --page-background-color: rgb(20, 20, 20);
+        --text-color: rgb(235, 235, 235);
+        --darkmode-btn-color: rgb(30, 30, 30);
+      }
+      #burgers {
+        display: none;
+      }
+      @media all and (max-width: 700px) {
+        #pc-productcs {
+          display: none;
+        }
+        #burgers {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="flex-container">
+        <a href="../web_page/main.html">
+          <div class="btn">
+            Home
+          </div>
+        </a>
+        <a href="about.html">
+          <div class="btn">
+            About
+          </div>
+        </a>
+        <a href="contact.html">
+          <div class="btn">
+            Contact
+          </div>
+        </a>
+        <div id="burgers">
+          <select>
+            <option value="Siera burgers">Siera burgers</option>
+            <option value="liellopa burgers">liellopa burgers</option>
+            <option value="bekona burgers">bekona burgers</option>
+          </select>
+
+        </div>
+        <label id="darkmode-label">
+          <div class="darkmode-btn-container">
+            <input type="checkbox">
+            <div class="circle1-wrap"><div class="circle1"></div></div>
+            <div class="circle2-wrap"><div class="circle2"></div></div>
+            <div class="circle1-wrap" id="sun-rays"></div>
+          </div>
+        </label>
+        
+      </div>
+    </header>
+    <main>
+      <div id="pc-productcs">
+        <div id="Modal" class="modal"></div>
+        <h1>
+          Here are some of our products!
+        </h1>
+        <div class="flex-container">
+          <div class="card-lvl1">
+            <div class="card-lvl2" id="card-lvl2-0">
+              <img src="../Img/Rims2.jpeg" alt="rims img">
+              <h3>Black rims</h3>
+              <p>
+                These are the best rims on the market. These rims will make evry car look beter.
+              </p>
+              <button class="btn" id="btn0">
+                More info
+              </button>
+            </div>
+          </div>
+
+          <div class="card-lvl1">
+            <div class="card-lvl2" id="card-lvl2-1">
+              <img src="../Img/bmw_drifting_angle_kit.webp" alt="BMW drifting angle kit">
+              <h3>BMW angle kit</h3>
+              <p>
+                This is the best angle kit BMW offers. If you want to drift grab them while they have good price.
+              </p>
+              <button class="btn" id="btn1">
+                More info
+              </button>
+            </div>
+          </div>
+
+          <div class="card-lvl1">
+            <div class="card-lvl2" id="card-lvl2-2">
+              <img src="../Img/adjustable_springs.webp" alt="Adjustable springs">
+              <h3>Adjustable springs</h3>
+              <p>
+                These springs have adjustable stiffness. Tune them to make the sexiest drift.
+              </p>
+              <button class="btn" id="btn2">
+                More info
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="flex-container">
+        <a href="https://x.com/">
+          <div class="btn">
+            X.com
+          </div>
+        </a>
+        <a href="https://www.youtube.com/">
+          <div class="btn">
+            Youtube
+          </div>
+        </a>
+        <a href="https://www.tiktok.com/explore">
+          <div class="btn">
+            TikTok
+          </div>
+        </a>
+        <div class="autortiesibas">
+          All rights reserved!
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script>
+    let sunRayContainer = document.getElementById("sun-rays");
+    const RAY_CNT = 12;
+    const MAX_PERCENTAGE = 45;
+    let newRays = "";
+    let newX = 0;
+    let newY = 0;
+    for (let i = 0; i < RAY_CNT; i++) {
+      let newRot = i * 360 / RAY_CNT + 90;
+      newRays = newRays + `<div class="light-ray" style="--ray-rot: ` + newRot + `deg;"></div>`
+    }
+    sunRayContainer.innerHTML = sunRayContainer.innerHTML + newRays;
+    // Get the modal
+    var modal = document.getElementById("Modal");
+    var modal_html = modal.innerHTML;
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("Btn");
+    var btn0 = document.getElementById("btn0");
+    var btn1 = document.getElementById("btn1");
+    var btn2 = document.getElementById("btn2");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn0.onclick = function() {
+      modal.style.display = "block";
+      modal.innerHTML += `
+      <div class="more_info_tbl">
+        <span class="close" id="close-btn">&times;</span>
+        <label style="font-size: 40px; text-align: center; width: 100%;" for="modal-table">
+          More info about the rims!
+        </label>
+        <table id="modal-table">
+          <tr>
+            <th rowspan="3">
+              <img src="../Img/Rims2.jpeg" alt="No img" width="300px" height="200px">
+            </th>
+            <th>
+              <h1>
+                Black rims
+              </h1>
+            </th>
+          </tr>
+          <tr>
+            <th style="padding: 30px; font-size: 22px;">
+              <p>
+                These are the best rims on the market. These rims will make evry car look beter.
+              </p>
+            </th>
+          </tr>
+          <tr>
+            <th style="font-size: 60px;">
+              199.99 Euro
+            </th>
+          </tr>
+        </table>
+      </div>`;
+      span = document.getElementById("close-btn");
+      span.onclick = function() {
+        modal.style.display = "none";
+        modal.innerHTML = modal_html;
+      }
+    }
+    btn1.onclick = function() {
+      modal.style.display = "block";
+      modal.innerHTML += `
+      <div class="more_info_tbl">
+        <span class="close" id="close-btn">&times;</span>
+        <label style="font-size: 40px; text-align: center; width: 100%;" for="modal-table">
+          More info about the angle kit!
+        </label>
+        <table id="modal-table">
+          <tr>
+            <th rowspan="3">
+              <img src="../Img/bmw_drifting_angle_kit.webp" alt="No img" width="300px" height="200px">
+            </th>
+            <th>
+              <h1>
+                BMW angle kit
+              </h1>
+            </th>
+          </tr>
+          <tr>
+            <th style="padding: 30px; font-size: 22px;">
+              <p>
+                This is the best angle kit BMW offers. If you want to drift grab them while they have good price.
+              </p>
+            </th>
+          </tr>
+          <tr>
+            <th style="font-size: 60px;">
+              239.99 Euro
+            </th>
+          </tr>
+        </table>
+      </div>`;
+      span = document.getElementById("close-btn");
+      span.onclick = function() {
+        modal.style.display = "none";
+        modal.innerHTML = modal_html;
+      }
+    }
+    btn2.onclick = function() {
+      modal.style.display = "block";
+      modal.innerHTML += `
+      <div class="more_info_tbl">
+        <span class="close" id="close-btn">&times;</span>
+        <label style="font-size: 40px; text-align: center; width: 100%;" for="modal-table">
+          More info about the springs!
+        </label>
+        <table id="modal-table">
+          <tr>
+            <th rowspan="3">
+              <img src="../Img/adjustable_springs.webp" alt="No img" width="300px" height="200px">
+            </th>
+            <th>
+              <h1>
+                Adjustable springs
+              </h1>
+            </th>
+          </tr>
+          <tr>
+            <th style="padding: 30px; font-size: 22px;">
+              <p>
+                These springs have adjustable stiffness. Tune them to make the sexiest drift.
+              </p>
+            </th>
+          </tr>
+          <tr>
+            <th style="font-size: 60px;">
+              189.99 Euro
+            </th>
+          </tr>
+        </table>
+      </div>`;
+      span = document.getElementById("close-btn");
+      span.onclick = function() {
+        modal.style.display = "none";
+        modal.innerHTML = modal_html;
+      }
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+        modal.innerHTML = modal_html;
+      }
+    }
+  </script>
+</html>
