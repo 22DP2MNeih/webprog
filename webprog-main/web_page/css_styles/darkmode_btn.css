@@ -1,0 +1,106 @@
+.darkmode-btn-container {
+    position: relative;
+    width: var(--dm-btn-size);
+    height: var(--dm-btn-size);
+    background-color: var(--body-bg);
+    transition: all var(--animation-time);
+    border-radius: 10%;
+  }
+
+  .darkmode-btn-container:hover {
+    background-color: var(--darkmode-btn-bg);
+    box-shadow: 0.2rem 0.2rem 0.3rem 0.1rem var(--darkmode-btn-bg-t);
+  }
+
+
+  .circle1-wrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all var(--animation-time);
+    overflow: hidden;
+  }
+
+  .circle2-wrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all var(--animation-time);
+  }
+
+  .circle1 {
+    position: absolute;
+    top: inherit;
+    left: inherit;
+    width: 100%;
+    height: 100%;
+    background-color: var(--darkmode);
+    clip-path: circle(28% at 50% 50%);
+    transition: all var(--animation-time);
+  }
+  .circle2 {
+    position: absolute;
+    top: inherit;
+    left: inherit;
+    width: 100%;
+    height: 100%;
+    background-color: var(--body-bg);
+    clip-path: circle(31% at 67% 40%);
+    transition: all var(--animation-time);
+  }
+  .darkmode-btn-container:hover .circle2{
+    --body-bg: var(--darkmode-btn-bg);
+  }
+
+  body {
+    background-color: var(--body-bg);
+    transition: all var(--animation-time);
+  }
+
+  :root {
+    --body-bg: rgb(50, 50, 200);
+    --darkmode: rgb(180, 180, 130);
+    --darkmode2: rgba(180, 180, 130, 0.8);
+    --darkmode-btn-bg: rgb(30, 30, 30);
+    --darkmode-btn-bg-t: rgba(34, 34, 34, 0.663);
+    --animation-time: 0.7s;
+    --ray-rot: 0deg;
+    --dm-btn-size: 40rem;
+    --ray-len: calc(var(--dm-btn-size) * 0.4);
+    
+  }
+
+  .light-ray {
+    position: absolute;
+    width: var(--dm-btn-size);
+    height: var(--dm-btn-size);
+    transition: all var(--animation-time);
+    background-color: var(--darkmode);
+    clip-path: inset(49% 85% round 1%);
+    rotate: var(--ray-rot);
+  }
+
+  :root:has(.darkmode-btn-container input:checked) {
+    --body-bg: rgb(50, 50, 50);
+    --darkmode: rgb(255, 200, 0);
+    --darkmode2: rgba(255, 200, 0, 0.8);
+  }
+  .darkmode-btn-container input:checked ~ .circle2-wrap .circle2{
+    clip-path: circle(0% at 90% 35%);
+  }
+  .darkmode-btn-container input:checked ~ .circle1-wrap {
+    filter: drop-shadow(0px 0px 12px var(--darkmode2));
+  }
+
+  .darkmode-btn-container input:checked ~ .circle1-wrap .light-ray {
+    transform: translateX(var(--ray-len));
+    clip-path: inset(49% 43% round 1%);
+  }
+
+  .darkmode-btn-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }

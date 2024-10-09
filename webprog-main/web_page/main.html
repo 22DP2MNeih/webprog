@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        <title>Car part manegment</title>
+        <link rel="icon" type="image/x-icon" href="../Img/car_parts_logo.avif">
+    </head>
+    
+    <body>
+        <header>
+        <div class="Title">
+            <div style="padding-right: 20px;">
+                <h1 class="glass">Car part<br>      manegment</h1>
+            </div>
+        </div>
+        </header>
+        <main>
+            <!-- <img src="../Img/car_parts_logo.avif"> -->
+             <div class="cropped-image">
+
+             </div>
+            <h5><a href="login.html">link text</a></h5>
+            <script src="scripts\jsisfunjee.js" type="text/javascript"></script>
+        </main>
+    </body>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.28);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+            font-size: 80px;
+            text-align: center;
+            color: rgb(42, 42, 252);
+        }
+
+        body {
+            background-color: rgb(116, 176, 245);
+        }
+
+        :root {
+
+            --image-size: 400px;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
+        .cropped-image {
+            width: var(--image-size);
+            height: var(--image-size);
+
+            background-image: url("../Img/car_parts_logo.avif");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            border-radius: 25% 75% / 50%;
+        }
+    </style>
+</html>
