@@ -9,7 +9,7 @@
 
   .darkmode-btn-container:hover {
     background-color: var(--darkmode-btn-bg);
-    box-shadow: 1rem 1rem 2rem 0.5rem var(--darkmode-btn-bg-t);
+    box-shadow: 0.2rem 0.2rem 0.3rem 0.1rem var(--darkmode-btn-bg-t);
   }
 
 
@@ -61,7 +61,7 @@
     --body-bg: rgb(50, 50, 200);
     --darkmode: rgb(180, 180, 130);
     --darkmode2: rgba(180, 180, 130, 0.8);
-    --darkmode-btn-bg: #222;
+    --darkmode-btn-bg: rgb(30, 30, 30);
     --darkmode-btn-bg-t: rgba(34, 34, 34, 0.663);
     --animation-time: 0.7s;
     --ray-rot: 0deg;
@@ -81,7 +81,7 @@
   }
 
   :root:has(.darkmode-btn-container input:checked) {
-    --body-bg: rgb(60, 60, 60);
+    --body-bg: rgb(50, 50, 50);
     --darkmode: rgb(255, 200, 0);
     --darkmode2: rgba(255, 200, 0, 0.8);
   }
