@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Car part manegment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="../Img/car_parts_logo.avif">
+    <link rel="stylesheet" href="css_styles/darkmode_btn.css">
+    <style>
+      header{
+        width: 100%;
+        font-size: medium;
+        transition: all var(--darkmode-transition-time);
+        background-color: var(--header-footer-background-color);
+        box-sizing: border-box;
+        margin: 0px;
+      }
+
+      footer {
+        position: fixed; 
+        bottom: 0%; 
+        width: 100%;
+        transition: all var(--darkmode-transition-time);
+        background-color: var(--header-footer-background-color);
+        margin: 0px;
+        box-sizing: border-box;
+        margin: 0px;
+      }
+
+      header .flex-container, 
+      footer .flex-container,
+      #item-display {
+        display: flex;
+        flex-wrap: nowrap;
+        /* background-color: #f1f1f1; */
+        flex-direction: row;
+        width: calc(100% - 15px);
+        /* margin: 10px; */
+        /* width: fit-content; */
+        box-sizing: border-box;
+        position: relative;
+      }
+      #item-display {
+        justify-content: center;
+        min-width: fit-content;
+      }
+
+      /* .darkmode-checkbox {
+        position: absolute;
+        width: 120px;
+        height: 40px;
+        right: 20px;
+        text-align: center;
+      } */
+      .darkmode-checkbox {
+        position: absolute;
+        width: 120px;
+        height: 40px;
+        right: 20px;
+        text-align: center;
+        background-color: conic-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 80%, rgba(5,106,185,1) 90%);
+      }
+      /* The container */
+      .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      /* Hide the browser's default checkbox */
+      .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+
+      /* Create a custom checkbox */
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+      }
+
+      /* On mouse-over, add a grey background color */
+      .container:hover input ~ .checkmark {
+        background-color: #ccc;
+      }
+
+      /* When the checkbox is checked, add a blue background */
+      .container input:checked ~ .checkmark {
+        background-color: #2196F3;
+        /* background-color: #222; */
+      }
+      
+      /* Create the checkmark/indicator (hidden when not checked) */
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+
+      /* Show the checkmark when checked */
+      .container input:checked ~ .checkmark:after {
+        display: block;
+      }
+
+      /* Style the checkmark/indicator */
+      .container .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+      .btn {
+        width: 120px;
+        height: 30px;
+        background-color: rgb(0, 87, 248);
+        color: rgba(240, 240, 240, 0.896);
+        margin: 10px;
+        text-align: center;
+        padding: 8px;
+        transition: all 0.4s;
+        border-radius: 7px;
+      }
+
+      .btn:hover {
+        background-color: rgb(3, 0, 178);
+      }
+      
+
+      .autortiesibas {
+        position: absolute;
+        right: 50px;
+        width: 200px;
+        height: 30px;
+        color: var(--text-color);
+        margin: 10px;
+        text-align: center;
+        padding: 8px;
+        transition: all var(--darkmode-transition-time);
+      }
+
+      body html {
+        width: 100%;
+        height: 100%;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      html {
+        background-color: var(--page-background-color);
+        transition: all var(--darkmode-transition-time);
+      }
+
+      h1 {
+        font-size: xx-large;
+        color: var(--text-color);
+        transition: all var(--darkmode-transition-time);
+      }
+      .modal h1 {
+        font-size: xx-large;
+        color: rgb(20, 20, 20);
+        transition: all var(--darkmode-transition-time);
+      }
+      .card-lvl1 {
+        position: relative;
+        width: 300px;
+        height: 440px;
+        padding: 0px;
+        margin: 30px;
+        display: block;
+        transition: all 0.6s;
+      }
+      .card-lvl2 {
+        position: absolute;
+        width: 300px;
+        height: 440px;
+        padding: 0px;
+        background-color: var(--card-background-color);
+        margin: 0px;
+        text-align: center;
+        transition: all 0.6s;
+        border-radius: 10px;
+        color: var(--text-color);
+      }
+
+      .card-lvl2 > img {
+        width: 100%;
+        height: 40%;
+        border-radius: 10px 10px 0px 0px;
+      }
+
+      .card-lvl2 > p {
+        margin: 15px;
+        font-size: 20px;
+      }
+      .card-lvl2 > h3 {
+        margin: 15px;
+        font-size: 35px;
+      }
+
+      .card-lvl2 > button {
+        /* height: 30px;
+        
+        border-radius: 7px; */
+        width: 200px;
+        height: 50px;
+        position: absolute;
+        font-size: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 5%;
+      }
+
+      @keyframes move-up {
+        0%   {top: 0px; background: var(--card-background-color);}
+        15%  {top: 10px;}
+        35%  {top: 0px;}
+        50%  {top: 10px; background: rgb(128, 0, 255);}
+        65%  {top: 0px;}
+        85%  {top: 10px;}
+        100% {top: 0px; background: var(--card-background-color);}
+      }
+      .card-lvl1:hover > .card-lvl2 {
+        transform: translateY(-25px);
+        animation: move-up 2s;
+        animation-iteration-count: infinite;
+        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+      }
+
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+
+      /* Modal Content */
+      /* .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+      } */
+
+      /* The Close Button */
+      .close {
+        position: absolute;
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        right: 12px;
+        top: 9px;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      /* h1 {
+        /* font-size: 40px; *//*
+      } */
+      .more_info_tbl {
+        position: absolute;
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 80%, rgba(5,106,185,1) 90%);
+        margin: 0px;
+        padding: 25px;
+        border-radius: 10px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .more_info_tbl img {
+        border-radius: 10px;
+      }
+
+      :root {
+        --header-footer-background-color: #f1f1f1;
+        --card-background-color: rgb(2, 167, 227);
+        --page-background-color: rgb(190, 237, 255);
+        --text-color: rgb(10, 10, 10);
+        --darkmode-transition-time: 0.7s;
+        --darkmode-btn-bg-color: var(--header-footer-background-color);
+        --darkmode-btn-color: rgb(255, 225, 0);
+        --dm-btn-size: 3rem;
+        --image-size:20rem;
+      }
+      :root:has(.darkmode-btn-container input:checked){
+        --card-background-color: rgb(60,60,60);
+        --header-footer-background-color: rgb(40, 40, 40);
+        --page-background-color: rgb(20, 20, 20);
+        --text-color: rgb(235, 235, 235);
+        --darkmode-btn-color: rgb(30, 30, 30);
+      }
+      /* :root:has(#burger-button input:checked){
+        --card-background-color: rgb(60,60,60);
+        --header-footer-background-color: rgb(40, 40, 40);
+        --page-background-color: rgb(20, 20, 20);
+        --text-color: rgb(235, 235, 235);
+        --darkmode-btn-color: rgb(30, 30, 30);
+      } */
+      #burgers {
+        display: none;
+      }
+      #burger-button > div {
+        background-color: rgb(0, 87, 248);
+        height: 70px;
+        width: 70px;
+        transition: all var(--darkmode-transition-time);
+      }
+      #burger-button:hover > div {
+        background-color: rgb(3, 0, 178);
+        position: relative;
+      }
+
+      #burger-button > div > div {
+        position: relative;
+        display: flex;
+        width: 80%;
+        height: 80%;
+        align-content: center;
+        flex-direction: column;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: all var(--darkmode-transition-time);
+      }
+
+      #burger-button div > div div{
+        width: 100%;
+        height: 10%;
+        background-color: #aaaaaa;
+        margin-top: 11.67%;
+        margin-bottom: 11.67%;
+        border-radius: 0%;
+      }
+
+      /* #burger-button input:checked ~ div > div{
+        transform: rotate(90deg);
+      } */
+      #burger-button {
+        display: none;
+      }
+
+
+      :root:has(#burger-button input:checked) header .btn,
+      :root:has(#burger-button input:checked) footer .btn {
+        display: block;
+      }
+
+      @media all and (max-width: 1080px) {
+        header .btn,
+        footer .btn {
+          display: none;
+        }
+
+        #burger-button {
+          display: block;
+        }
+
+        #item-display {
+          flex-direction: column;
+        }
+
+        .card-lvl1 {
+          transform: translateX(-50%);
+          left: 50%;
+        }
+        
+
+      }
+      body {
+        margin: 0px;
+      }
+
+      .sidebar {
+        position: fixed;
+        right: 1%;
+        width: 8%;
+        height: 50%;
+        padding: 8px;
+        transform: translateX(-8%);
+        background-color: rgb(140, 140, 140);
+        transition: all 1s;
+      }
+      .cropped-image {
+            width: var(--image-size);
+            height: var(--image-size);
+
+            background-image: url("../Img/car_parts_logo.avif");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            border-radius: 25% 75% / 50%;
+        }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="flex-container">
+
+        <label id="burger-button">
+          <input type="checkbox" style="display: none;">
+          <div>
+            <div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        </label>
+
+        <a href="../uzd/main.html">
+          <div class="btn">
+            Home
+          </div>
+        </a>
+        <a href="about.html">
+          <div class="btn">
+            About
+          </div>
+        </a>
+        <a href="contact.html">
+          <div class="btn">
+            Contact
+          </div>
+        </a>
+        <a href="../web_page/pricing.html">
+          <div class="btn">
+            Products
+          </div>
+        </a>
+
+        <label id="darkmode-label" style="transform: translateY(10px); position: absolute; right: 3rem;">
+          <div class="darkmode-btn-container">
+            <input type="checkbox">
+            <div class="circle1-wrap"><div class="circle1"></div></div>
+            <div class="circle2-wrap"><div class="circle2"></div></div>
+            <div class="circle1-wrap" id="sun-rays"></div>
+          </div>
+        </label>
+        
+      </nav>
+    </header>
+    <main>
+      <h1></h1>
+      <div class="cropped-image"></div>
+    </main>
+    <footer>
+      <nav class="flex-container">
+        <a href="https://x.com/">
+          <div class="btn">
+            X.com
+          </div>
+        </a>
+        <a href="https://www.youtube.com/">
+          <div class="btn">
+            Youtube
+          </div>
+        </a>
+        <a href="https://www.tiktok.com/explore">
+          <div class="btn">
+            TikTok
+          </div>
+        </a>
+        <div class="autortiesibas">
+          All rights reserved!
+        </div>
+      </nav>
+    </footer>
+  </body>
+  <script>
+    let sunRayContainer = document.getElementById("sun-rays");
+    const RAY_CNT = 12;
+    const MAX_PERCENTAGE = 45;
+    let newRays = "";
+    let newX = 0;
+    let newY = 0;
+    for (let i = 0; i < RAY_CNT; i++) {
+      let newRot = i * 360 / RAY_CNT + 90;
+      newRays = newRays + `<div class="light-ray" style="--ray-rot: ` + newRot + `deg;"></div>`
+    }
+    sunRayContainer.innerHTML = sunRayContainer.innerHTML + newRays;
+  </script>
+</html>
